@@ -12,7 +12,7 @@ public class CFGApplication {
 
 	public static String curDir;
 	
-//	private cfpJFrame f;
+//	private cfpJFrame fxxxxxx;
 	
 	@Autowired
 	private appSounds sp;
