@@ -22,6 +22,7 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 
 import com.bpo.cfg.application.CFGApplication;
 import com.bpo.cfg.constants.appConstants;
@@ -56,8 +57,6 @@ public class panelNewLeague1 extends JPanel  implements ActionListener {
 		setLayout(new BorderLayout());
 		setForeground(Color.GRAY);
 		setBackground(new Color(appConstants.MBACKGROUNDRED, appConstants.MBACKGROUNDGREEN, appConstants.MBACKGROUNDBLUE));
-		
-		
 
 		
 		ltitle.setFont(appConstants.formTitleFont);
@@ -68,9 +67,14 @@ public class panelNewLeague1 extends JPanel  implements ActionListener {
 		butCancel.setPreferredSize(new Dimension(appConstants.NORMALBTNWIDTH, appConstants.NORMALBTNHEIGHT));
 		butCancel.setForeground(appConstants.NORMALBTNFOREGROUNDCOLOR);
 		butCancel.setBackground(appConstants.NORMALBTNBACKGROUNDCOLOR);
+		butCancel.setFocusable(false);
+		butCancel.addActionListener(this);
+		
 		butSave.setPreferredSize(new Dimension(appConstants.NORMALBTNWIDTH, appConstants.NORMALBTNHEIGHT));
 		butSave.setForeground(appConstants.NORMALBTNFOREGROUNDCOLOR);
 		butSave.setBackground(appConstants.NORMALBTNBACKGROUNDCOLOR);
+		butSave.setFocusable(false);
+		butSave.addActionListener(this);
 		
 		add(ltitle, BorderLayout.NORTH);
 		painOKCancel.setLayout(new FlowLayout());
@@ -98,7 +102,24 @@ public class panelNewLeague1 extends JPanel  implements ActionListener {
 	}
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		// TODO Auto-generated method stub
+
+		if (arg0.getSource() == butCancel)
+		{
+			cfpJFrame cfgf = (cfpJFrame)SwingUtilities.getAncestorOfClass(cfpJFrame.class, this);
+			CardLayout cardLayout = (CardLayout) cfgf.cards.getLayout();
+			if (bnewLeague)
+				cardLayout.show(cfgf.cards, "main Menu");			
+		} else 	if (arg0.getSource() == butSave)
+		{
+			cfpJFrame cfgf = (cfpJFrame)SwingUtilities.getAncestorOfClass(cfpJFrame.class, this);
+			CardLayout cardLayout = (CardLayout) cfgf.cards.getLayout();
+			if (bnewLeague)
+			{
+//create league file				
+				cardLayout.show(cfgf.cards, "main Menu");		
+			}
+		}
+		
 		
 	}
 
