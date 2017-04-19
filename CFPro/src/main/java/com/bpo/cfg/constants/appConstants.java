@@ -20,9 +20,14 @@ public class appConstants {
 	
 	public static final Color MFORGROUNDCOLOR = Color.WHITE;
 	
-//textboxes	
-	public static final Color TXTBACKGROUND = Color.WHITE;
-	public static final Color TXTFOREGROUND = Color.BLACK;
+
+//Mini panes	
+	public static final Color MINIBORDERCOLOR = Color.white;	
+	public static final Color MINIBORDERTITLECOLOR = Color.white;	
+	public static final Color MINIPANEBGCOLOR = new Color(99,12,15);
+	public static final Color MINITXTBACKGROUND = Color.WHITE;
+	public static final Color MINITXTFOREGROUND = Color.BLACK;	
+	public static final Color MINILABELFG = Color.WHITE;
 	
 //Main Menu	
 	public static final int MAINIMAGEWIDTH = 500;

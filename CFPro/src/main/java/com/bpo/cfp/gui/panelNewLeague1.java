@@ -13,10 +13,12 @@ import java.awt.event.ActionListener;
 import java.util.Calendar;
 
 import javax.annotation.PostConstruct;
+import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
@@ -40,6 +42,8 @@ public class panelNewLeague1 extends JPanel  implements ActionListener {
 	private JButton butSave = new JButton("Save");
 	private JButton butCancel = new JButton("Cancel");
 	private JPanel painOKCancel = new JPanel();
+	
+	
 	
 	
 	@Autowired
@@ -77,6 +81,40 @@ public class panelNewLeague1 extends JPanel  implements ActionListener {
 		butSave.addActionListener(this);
 		
 		add(ltitle, BorderLayout.NORTH);
+		
+		JPanel pane = new JPanel();
+		pane.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(appConstants.MINIBORDERCOLOR), "General"));
+		pane.setBackground(appConstants.MINIPANEBGCOLOR);
+		GridBagConstraints gbc1 = new GridBagConstraints();
+        gbc1.gridx = 0;
+        gbc1.gridy = 0;	
+		JLabel lName = new JLabel("League Name:");
+		lName.setForeground(appConstants.MINILABELFG);
+		pane.add(lName,gbc1);
+		gbc1.gridx++;
+		JTextField txtName = new JTextField(6);
+		txtName.setBackground(appConstants.MINITXTBACKGROUND);
+		txtName.setForeground(appConstants.MINITXTFOREGROUND);
+		pane.add(txtName,gbc1);
+		gbc1.gridx++;
+		JLabel lLongName = new JLabel("Long Name:");
+		lLongName.setForeground(appConstants.MINILABELFG);
+		pane.add(lLongName,gbc1);
+		gbc1.gridx++;
+		JTextField txtLongName = new JTextField(50);
+
+		txtLongName.setBackground(appConstants.MINITXTBACKGROUND);
+		txtLongName.setForeground(appConstants.MINITXTFOREGROUND);
+		pane.add(txtLongName,gbc1);
+		gbc1.gridx++;
+		final JButton btnUploadImage = new JButton("League Image");
+		pane.add(btnUploadImage,gbc1);
+		gbc1.gridx++;
+		JLabel lLeagueImage = new JLabel();
+		pane.add(lLeagueImage, gbc1);
+
+        add(pane,  BorderLayout.CENTER);
+        
 		painOKCancel.setLayout(new FlowLayout());
 		painOKCancel.add(butCancel);
 		painOKCancel.add(butSave);
