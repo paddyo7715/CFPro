@@ -14,6 +14,8 @@ public class appConstants {
 	public  static final int MBACKGROUNDGREEN = 38;
 	public  static final int MBACKGROUNDBLUE = 9;
 	
+	public static final Color MAINBGCOLOR = new Color(10,38,9);
+	
 	public  static final int MBUTBACKGROUNDRED = 99;
 	public  static final int MBUTBACKGROUNDGREEN = 12;
 	public  static final int MBUTBACKGROUNDBLUE = 15;

@@ -16,6 +16,7 @@ import javax.annotation.PostConstruct;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.ButtonGroup;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
@@ -25,6 +26,8 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
+import javax.swing.border.Border;
+import javax.swing.border.TitledBorder;
 
 import com.bpo.cfg.application.CFGApplication;
 import com.bpo.cfg.constants.appConstants;
@@ -42,9 +45,6 @@ public class panelNewLeague1 extends JPanel  implements ActionListener {
 	private JButton butSave = new JButton("Save");
 	private JButton butCancel = new JButton("Cancel");
 	private JPanel painOKCancel = new JPanel();
-	
-	
-	
 	
 	@Autowired
 	private CFGApplication cApp;
@@ -82,38 +82,65 @@ public class panelNewLeague1 extends JPanel  implements ActionListener {
 		
 		add(ltitle, BorderLayout.NORTH);
 		
-		JPanel pane = new JPanel();
-		pane.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(appConstants.MINIBORDERCOLOR), "General"));
-		pane.setBackground(appConstants.MINIPANEBGCOLOR);
+		JPanel panCenter = new JPanel();
+		panCenter.setBackground(appConstants.MAINBGCOLOR);
+		
+		JPanel paneGen = new JPanel();
+		paneGen.setLayout(new GridBagLayout());
+		
+		TitledBorder bordGeneral = BorderFactory.createTitledBorder(BorderFactory.createLineBorder(appConstants.MINIBORDERCOLOR), "General");
+		bordGeneral.setTitleColor(appConstants.MINIBORDERCOLOR);
+		paneGen.setBorder(bordGeneral);
+
+		paneGen.setBackground(appConstants.MINIPANEBGCOLOR);
 		GridBagConstraints gbc1 = new GridBagConstraints();
         gbc1.gridx = 0;
         gbc1.gridy = 0;	
 		JLabel lName = new JLabel("League Name:");
 		lName.setForeground(appConstants.MINILABELFG);
-		pane.add(lName,gbc1);
+		paneGen.add(lName,gbc1);
 		gbc1.gridx++;
-		JTextField txtName = new JTextField(6);
+		JTextFieldLimit txtName = new JTextFieldLimit(6);
+		txtName.setColumns(6);
 		txtName.setBackground(appConstants.MINITXTBACKGROUND);
 		txtName.setForeground(appConstants.MINITXTFOREGROUND);
-		pane.add(txtName,gbc1);
+		paneGen.add(txtName,gbc1);
 		gbc1.gridx++;
 		JLabel lLongName = new JLabel("Long Name:");
 		lLongName.setForeground(appConstants.MINILABELFG);
-		pane.add(lLongName,gbc1);
+		paneGen.add(lLongName,gbc1);
 		gbc1.gridx++;
-		JTextField txtLongName = new JTextField(50);
-
+		JTextFieldLimit txtLongName = new JTextFieldLimit(50);
+		txtLongName.setColumns(30);
 		txtLongName.setBackground(appConstants.MINITXTBACKGROUND);
 		txtLongName.setForeground(appConstants.MINITXTFOREGROUND);
-		pane.add(txtLongName,gbc1);
+		paneGen.add(txtLongName,gbc1);
 		gbc1.gridx++;
 		final JButton btnUploadImage = new JButton("League Image");
-		pane.add(btnUploadImage,gbc1);
+		paneGen.add(btnUploadImage,gbc1);
 		gbc1.gridx++;
 		JLabel lLeagueImage = new JLabel();
-		pane.add(lLeagueImage, gbc1);
+		lLeagueImage.setPreferredSize(new Dimension(40, 50));
+		paneGen.add(lLeagueImage, gbc1);
+		
+		gbc1.gridy++;
+		gbc1.gridx = 0;
+		JLabel lCommissioner = new JLabel("Commishener Name:");
+		lCommissioner.setForeground(appConstants.MINILABELFG);
+		paneGen.add(lCommissioner,gbc1);
+		gbc1.gridx++;
+		JTextFieldLimit txtCommissionerName = new JTextFieldLimit(50);
+		txtCommissionerName.setColumns(30);
+		txtCommissionerName.setBackground(appConstants.MINITXTBACKGROUND);
+		txtCommissionerName.setForeground(appConstants.MINITXTFOREGROUND);
+		paneGen.add(txtCommissionerName,gbc1);
+		
+		panCenter.add(paneGen);
 
-        add(pane,  BorderLayout.CENTER);
+		
+		
+		
+        add(panCenter,  BorderLayout.CENTER);
         
 		painOKCancel.setLayout(new FlowLayout());
 		painOKCancel.add(butCancel);
