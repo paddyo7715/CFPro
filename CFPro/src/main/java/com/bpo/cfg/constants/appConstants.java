@@ -30,6 +30,8 @@ public class appConstants {
 	public static final Color MINITXTBACKGROUND = Color.WHITE;
 	public static final Color MINITXTFOREGROUND = Color.BLACK;	
 	public static final Color MINILABELFG = Color.WHITE;
+	public static final Color MINIPANERADIOBGCOLOR = new Color(99,12,15);
+	public static final Color MINIPANERADIOFGCOLOR = Color.WHITE;
 	
 //Main Menu	
 	public static final int MAINIMAGEWIDTH = 500;

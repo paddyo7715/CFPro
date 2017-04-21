@@ -15,6 +15,7 @@ import java.util.Calendar;
 import javax.annotation.PostConstruct;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -86,54 +87,105 @@ public class panelNewLeague1 extends JPanel  implements ActionListener {
 		panCenter.setBackground(appConstants.MAINBGCOLOR);
 		
 		JPanel paneGen = new JPanel();
-		paneGen.setLayout(new GridBagLayout());
+		paneGen.setLayout(new BoxLayout(paneGen,BoxLayout.Y_AXIS));
+		
+		JPanel pGen1 = new JPanel();
+		JPanel pGen2 = new JPanel();
+		JPanel pGen3 = new JPanel();
+		FlowLayout fl = new FlowLayout();
+		fl.setAlignment(FlowLayout.LEFT);
+
+		pGen1.setLayout(fl);
+		pGen2.setLayout(fl);
+		pGen3.setLayout(fl);
 		
 		TitledBorder bordGeneral = BorderFactory.createTitledBorder(BorderFactory.createLineBorder(appConstants.MINIBORDERCOLOR), "General");
 		bordGeneral.setTitleColor(appConstants.MINIBORDERCOLOR);
 		paneGen.setBorder(bordGeneral);
 
+		pGen1.setBackground(appConstants.MINIPANEBGCOLOR);		
+		pGen2.setBackground(appConstants.MINIPANEBGCOLOR);
+		pGen3.setBackground(appConstants.MINIPANEBGCOLOR);
 		paneGen.setBackground(appConstants.MINIPANEBGCOLOR);
-		GridBagConstraints gbc1 = new GridBagConstraints();
-        gbc1.gridx = 0;
-        gbc1.gridy = 0;	
+
 		JLabel lName = new JLabel("League Name:");
 		lName.setForeground(appConstants.MINILABELFG);
-		paneGen.add(lName,gbc1);
-		gbc1.gridx++;
+		pGen1.add(lName);
+
 		JTextFieldLimit txtName = new JTextFieldLimit(6);
 		txtName.setColumns(6);
 		txtName.setBackground(appConstants.MINITXTBACKGROUND);
 		txtName.setForeground(appConstants.MINITXTFOREGROUND);
-		paneGen.add(txtName,gbc1);
-		gbc1.gridx++;
+		pGen1.add(txtName);
+
 		JLabel lLongName = new JLabel("Long Name:");
 		lLongName.setForeground(appConstants.MINILABELFG);
-		paneGen.add(lLongName,gbc1);
-		gbc1.gridx++;
+		pGen1.add(lLongName);
+
 		JTextFieldLimit txtLongName = new JTextFieldLimit(50);
 		txtLongName.setColumns(30);
 		txtLongName.setBackground(appConstants.MINITXTBACKGROUND);
 		txtLongName.setForeground(appConstants.MINITXTFOREGROUND);
-		paneGen.add(txtLongName,gbc1);
-		gbc1.gridx++;
+		pGen1.add(txtLongName);
+
 		final JButton btnUploadImage = new JButton("League Image");
-		paneGen.add(btnUploadImage,gbc1);
-		gbc1.gridx++;
+		pGen1.add(btnUploadImage);
+
 		JLabel lLeagueImage = new JLabel();
-		lLeagueImage.setPreferredSize(new Dimension(40, 50));
-		paneGen.add(lLeagueImage, gbc1);
+		lLeagueImage.setPreferredSize(new Dimension(30, 40));
+		pGen1.add(lLeagueImage);
 		
-		gbc1.gridy++;
-		gbc1.gridx = 0;
 		JLabel lCommissioner = new JLabel("Commishener Name:");
 		lCommissioner.setForeground(appConstants.MINILABELFG);
-		paneGen.add(lCommissioner,gbc1);
-		gbc1.gridx++;
+		pGen2.add(lCommissioner);
+
 		JTextFieldLimit txtCommissionerName = new JTextFieldLimit(50);
 		txtCommissionerName.setColumns(30);
 		txtCommissionerName.setBackground(appConstants.MINITXTBACKGROUND);
 		txtCommissionerName.setForeground(appConstants.MINITXTFOREGROUND);
-		paneGen.add(txtCommissionerName,gbc1);
+		pGen2.add(txtCommissionerName);
+
+		JLabel lEmail = new JLabel("League Email:");
+		lEmail.setForeground(appConstants.MINILABELFG);
+		pGen2.add(lEmail);
+
+		JTextFieldLimit txtLeagueEmail = new JTextFieldLimit(50);
+		txtLeagueEmail.setColumns(20);
+		txtLeagueEmail.setBackground(appConstants.MINITXTBACKGROUND);
+		txtLeagueEmail.setForeground(appConstants.MINITXTFOREGROUND);
+		pGen2.add(txtLeagueEmail);
+		
+		JLabel lChampionshipGameName = new JLabel("Chanpionship Game Name:");
+		lChampionshipGameName.setForeground(appConstants.MINILABELFG);
+		pGen3.add(lChampionshipGameName);
+
+		JTextFieldLimit txtChampionshipGame = new JTextFieldLimit(50);
+		txtChampionshipGame.setColumns(30);
+		txtChampionshipGame.setBackground(appConstants.MINITXTBACKGROUND);
+		txtChampionshipGame.setForeground(appConstants.MINITXTFOREGROUND);
+		pGen3.add(txtChampionshipGame);
+
+		//Create the radio buttons.
+	    JRadioButton localButton = new JRadioButton("Local");
+	    localButton.setSelected(true);
+	    localButton.setForeground(appConstants.MINIPANERADIOFGCOLOR);
+	    localButton.setBackground(appConstants.MINIPANERADIOBGCOLOR);
+
+	    JRadioButton remoteButton = new JRadioButton("Remote");
+	    remoteButton.setForeground(appConstants.MINIPANERADIOFGCOLOR);
+	    remoteButton.setBackground(appConstants.MINIPANERADIOBGCOLOR);
+	    
+	    //Group the radio buttons.
+	    ButtonGroup groupLeagueType = new ButtonGroup();
+	    groupLeagueType.add(localButton);
+	    groupLeagueType.add(remoteButton);
+
+		pGen3.add(localButton);
+		pGen3.add(remoteButton);
+
+		paneGen.add(pGen1);
+		paneGen.add(pGen2);
+		paneGen.add(pGen3);
 		
 		panCenter.add(paneGen);
 
