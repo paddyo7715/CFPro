@@ -33,6 +33,12 @@ public class appConstants {
 	public static final Color MINIPANERADIOBGCOLOR = new Color(99,12,15);
 	public static final Color MINIPANERADIOFGCOLOR = Color.WHITE;
 	
+	public static final int FORMBTNWIDTH = 100;
+	public static final int FORMBTNHEIGHT = 30;
+	public static final Color FORMBTNFOREGROUNDCOLOR = Color.WHITE;
+	public static final Color FORMBTNBACKGROUNDCOLOR =  new Color(10,38,9);
+
+	
 //Main Menu	
 	public static final int MAINIMAGEWIDTH = 500;
 	public static final int MAINIMAGEHEIGHT = 350;

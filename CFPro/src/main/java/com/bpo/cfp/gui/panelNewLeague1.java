@@ -87,84 +87,94 @@ public class panelNewLeague1 extends JPanel  implements ActionListener {
 		panCenter.setBackground(appConstants.MAINBGCOLOR);
 		
 		JPanel paneGen = new JPanel();
-		paneGen.setLayout(new BoxLayout(paneGen,BoxLayout.Y_AXIS));
+		paneGen.setLayout(new GridBagLayout());
 		
-		JPanel pGen1 = new JPanel();
-		JPanel pGen2 = new JPanel();
-		JPanel pGen3 = new JPanel();
-		FlowLayout fl = new FlowLayout();
-		fl.setAlignment(FlowLayout.LEFT);
-
-		pGen1.setLayout(fl);
-		pGen2.setLayout(fl);
-		pGen3.setLayout(fl);
+		GridBagConstraints b = new GridBagConstraints();
+		b.anchor = GridBagConstraints.WEST;
+		b.gridx  = 0;
+		b.gridy = 0;
 		
 		TitledBorder bordGeneral = BorderFactory.createTitledBorder(BorderFactory.createLineBorder(appConstants.MINIBORDERCOLOR), "General");
 		bordGeneral.setTitleColor(appConstants.MINIBORDERCOLOR);
 		paneGen.setBorder(bordGeneral);
 
-		pGen1.setBackground(appConstants.MINIPANEBGCOLOR);		
-		pGen2.setBackground(appConstants.MINIPANEBGCOLOR);
-		pGen3.setBackground(appConstants.MINIPANEBGCOLOR);
 		paneGen.setBackground(appConstants.MINIPANEBGCOLOR);
 
 		JLabel lName = new JLabel("League Name:");
 		lName.setForeground(appConstants.MINILABELFG);
-		pGen1.add(lName);
+		paneGen.add(lName,b);
 
+		b.gridx++;
 		JTextFieldLimit txtName = new JTextFieldLimit(6);
 		txtName.setColumns(6);
 		txtName.setBackground(appConstants.MINITXTBACKGROUND);
 		txtName.setForeground(appConstants.MINITXTFOREGROUND);
-		pGen1.add(txtName);
-
+		paneGen.add(txtName,b);
+		b.gridx++;
+		
 		JLabel lLongName = new JLabel("Long Name:");
 		lLongName.setForeground(appConstants.MINILABELFG);
-		pGen1.add(lLongName);
+		paneGen.add(lLongName,b);
 
+		b.gridx++;
 		JTextFieldLimit txtLongName = new JTextFieldLimit(50);
-		txtLongName.setColumns(30);
+		txtLongName.setColumns(18);
 		txtLongName.setBackground(appConstants.MINITXTBACKGROUND);
 		txtLongName.setForeground(appConstants.MINITXTFOREGROUND);
-		pGen1.add(txtLongName);
+		paneGen.add(txtLongName,b);
 
-		final JButton btnUploadImage = new JButton("League Image");
-		pGen1.add(btnUploadImage);
+		b.gridx++;
+		final JButton btnUploadImage = new JButton("Upload Image");
+		btnUploadImage.setBackground(appConstants.FORMBTNBACKGROUNDCOLOR);
+		btnUploadImage.setForeground(appConstants.FORMBTNFOREGROUNDCOLOR);
+		btnUploadImage.setFocusable(false);
+		btnUploadImage.setPreferredSize(new Dimension(120,20));
+		paneGen.add(btnUploadImage,b);
 
+		b.gridx++;
 		JLabel lLeagueImage = new JLabel();
-		lLeagueImage.setPreferredSize(new Dimension(30, 40));
-		pGen1.add(lLeagueImage);
+		lLeagueImage.setPreferredSize(new Dimension(30, 25));
+		paneGen.add(lLeagueImage,b);
 		
-		JLabel lCommissioner = new JLabel("Commishener Name:");
+		b.gridy++;
+		b.gridx =0;
+		JLabel lCommissioner = new JLabel("Commishener:");
 		lCommissioner.setForeground(appConstants.MINILABELFG);
-		pGen2.add(lCommissioner);
+		paneGen.add(lCommissioner,b);
 
+		b.gridx++;
 		JTextFieldLimit txtCommissionerName = new JTextFieldLimit(50);
-		txtCommissionerName.setColumns(30);
+		txtCommissionerName.setColumns(18);
 		txtCommissionerName.setBackground(appConstants.MINITXTBACKGROUND);
 		txtCommissionerName.setForeground(appConstants.MINITXTFOREGROUND);
-		pGen2.add(txtCommissionerName);
+		paneGen.add(txtCommissionerName,b);
 
+		b.gridx++;
 		JLabel lEmail = new JLabel("League Email:");
 		lEmail.setForeground(appConstants.MINILABELFG);
-		pGen2.add(lEmail);
+		paneGen.add(lEmail,b);
 
+		b.gridx++;
 		JTextFieldLimit txtLeagueEmail = new JTextFieldLimit(50);
-		txtLeagueEmail.setColumns(20);
+		txtLeagueEmail.setColumns(18);
 		txtLeagueEmail.setBackground(appConstants.MINITXTBACKGROUND);
 		txtLeagueEmail.setForeground(appConstants.MINITXTFOREGROUND);
-		pGen2.add(txtLeagueEmail);
+		paneGen.add(txtLeagueEmail,b);
 		
-		JLabel lChampionshipGameName = new JLabel("Chanpionship Game Name:");
+		b.gridy++;
+		b.gridx =0;
+		JLabel lChampionshipGameName = new JLabel("Chanpionship Game:");
 		lChampionshipGameName.setForeground(appConstants.MINILABELFG);
-		pGen3.add(lChampionshipGameName);
+		paneGen.add(lChampionshipGameName,b);
 
+		b.gridx++;
 		JTextFieldLimit txtChampionshipGame = new JTextFieldLimit(50);
-		txtChampionshipGame.setColumns(30);
+		txtChampionshipGame.setColumns(18);
 		txtChampionshipGame.setBackground(appConstants.MINITXTBACKGROUND);
 		txtChampionshipGame.setForeground(appConstants.MINITXTFOREGROUND);
-		pGen3.add(txtChampionshipGame);
+		paneGen.add(txtChampionshipGame,b);
 
+		b.gridx++;
 		//Create the radio buttons.
 	    JRadioButton localButton = new JRadioButton("Local");
 	    localButton.setSelected(true);
@@ -180,13 +190,10 @@ public class panelNewLeague1 extends JPanel  implements ActionListener {
 	    groupLeagueType.add(localButton);
 	    groupLeagueType.add(remoteButton);
 
-		pGen3.add(localButton);
-		pGen3.add(remoteButton);
+	    paneGen.add(localButton,b);
+		b.gridx++;
+	    paneGen.add(remoteButton,b);
 
-		paneGen.add(pGen1);
-		paneGen.add(pGen2);
-		paneGen.add(pGen3);
-		
 		panCenter.add(paneGen);
 
 		
