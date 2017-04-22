@@ -4,6 +4,9 @@ import java.awt.Color;
 import java.awt.Font;
 
 public class appConstants {
+//Constatnts
+	public static final int EARLIESTSTARTINGYEAR = 1800;
+	public static final int YEARSINTHEFUTURESTARTINGYEAR = 100;
 	
 //Common GUI elements
 	public static final Color MBACKGROUNDCOLOR = Color.BLUE;
@@ -24,6 +27,7 @@ public class appConstants {
 	
 
 //Mini panes	
+	public static final Font PANETITLEFONT = new Font("Serif", Font.BOLD, 18);
 	public static final Color MINIBORDERCOLOR = Color.white;	
 	public static final Color MINIBORDERTITLECOLOR = Color.white;	
 	public static final Color MINIPANEBGCOLOR = new Color(99,12,15);

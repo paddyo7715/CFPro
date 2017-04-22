@@ -11,6 +11,7 @@ import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Calendar;
+import java.util.Date;
 
 import javax.annotation.PostConstruct;
 import javax.swing.BorderFactory;
@@ -34,7 +35,7 @@ import com.bpo.cfg.application.CFGApplication;
 import com.bpo.cfg.constants.appConstants;
 import com.bpo.cfg.enums.callLeagueConfigAction;
 
-import javafx.geometry.Insets;
+import java.awt.Insets;
 
 import org.springframework.stereotype.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,12 +65,10 @@ public class panelNewLeague1 extends JPanel  implements ActionListener {
 		setLayout(new BorderLayout());
 		setForeground(Color.GRAY);
 		setBackground(new Color(appConstants.MBACKGROUNDRED, appConstants.MBACKGROUNDGREEN, appConstants.MBACKGROUNDBLUE));
-
 		
 		ltitle.setFont(appConstants.formTitleFont);
 		ltitle.setForeground(appConstants.MFORGROUNDCOLOR);
 		ltitle.setHorizontalAlignment(SwingConstants.CENTER);
-
 
 		butCancel.setPreferredSize(new Dimension(appConstants.NORMALBTNWIDTH, appConstants.NORMALBTNHEIGHT));
 		butCancel.setForeground(appConstants.NORMALBTNFOREGROUNDCOLOR);
@@ -91,14 +90,32 @@ public class panelNewLeague1 extends JPanel  implements ActionListener {
 		JPanel paneGen = new JPanel();
 		paneGen.setLayout(new GridBagLayout());
 		
+		JLabel spacer1 = new JLabel("");
+		spacer1.setForeground(appConstants.MINILABELFG);
+		spacer1.setPreferredSize(new Dimension(1,appConstants.ROWHIGHTSPACER));
+
+		JLabel spacer2 = new JLabel("");
+		spacer2.setForeground(appConstants.MINILABELFG);
+		spacer2.setPreferredSize(new Dimension(1,appConstants.ROWHIGHTSPACER));
+
+		JLabel spacer3 = new JLabel("");
+		spacer3.setForeground(appConstants.MINILABELFG);
+		spacer3.setPreferredSize(new Dimension(1,appConstants.ROWHIGHTSPACER));
+
+		JLabel spacer4 = new JLabel("");
+		spacer4.setForeground(appConstants.MINILABELFG);
+		spacer4.setPreferredSize(new Dimension(1,appConstants.ROWHIGHTSPACER));
+		
 		GridBagConstraints b = new GridBagConstraints();
+		b.insets = new Insets(0, 5, 0, 0);
 
 		b.anchor = GridBagConstraints.WEST;
 		b.gridx  = 0;
 		b.gridy = 0;
 		
-		TitledBorder bordGeneral = BorderFactory.createTitledBorder(BorderFactory.createLineBorder(appConstants.MINIBORDERCOLOR), "General");
+		TitledBorder bordGeneral = BorderFactory.createTitledBorder(BorderFactory.createLineBorder(appConstants.MINIBORDERCOLOR), "General Settings");
 		bordGeneral.setTitleColor(appConstants.MINIBORDERCOLOR);
+		bordGeneral.setTitleFont(appConstants.PANETITLEFONT);
 		paneGen.setBorder(bordGeneral);
 
 		paneGen.setBackground(appConstants.MINIPANEBGCOLOR);
@@ -131,7 +148,7 @@ public class panelNewLeague1 extends JPanel  implements ActionListener {
 		btnUploadImage.setBackground(appConstants.FORMBTNBACKGROUNDCOLOR);
 		btnUploadImage.setForeground(appConstants.FORMBTNFOREGROUNDCOLOR);
 		btnUploadImage.setFocusable(false);
-		btnUploadImage.setPreferredSize(new Dimension(120,20));
+		btnUploadImage.setPreferredSize(new Dimension(140,20));
 		paneGen.add(btnUploadImage,b);
 
 		b.gridx++;
@@ -140,9 +157,6 @@ public class panelNewLeague1 extends JPanel  implements ActionListener {
 		paneGen.add(lLeagueImage,b);
 
 		b.gridx++;
-		JLabel spacer1 = new JLabel("");
-		spacer1.setForeground(appConstants.MINILABELFG);
-		spacer1.setPreferredSize(new Dimension(1,appConstants.ROWHIGHTSPACER));
 		paneGen.add(spacer1,b);
 		
 		b.gridy++;
@@ -171,9 +185,14 @@ public class panelNewLeague1 extends JPanel  implements ActionListener {
 		paneGen.add(txtLeagueEmail,b);
 		
 		b.gridx++;
-		JLabel spacer2 = new JLabel("");
-		spacer2.setForeground(appConstants.MINILABELFG);
-		spacer2.setPreferredSize(new Dimension(1,appConstants.ROWHIGHTSPACER));
+		final JButton btnLeaguePassword = new JButton("League Password");
+		btnLeaguePassword.setBackground(appConstants.FORMBTNBACKGROUNDCOLOR);
+		btnLeaguePassword.setForeground(appConstants.FORMBTNFOREGROUNDCOLOR);
+		btnLeaguePassword.setFocusable(false);
+		btnLeaguePassword.setPreferredSize(new Dimension(140,20));
+		paneGen.add(btnLeaguePassword,b);
+		
+		b.gridx++;
 		paneGen.add(spacer2,b);
 		
 		b.gridy++;
@@ -189,7 +208,31 @@ public class panelNewLeague1 extends JPanel  implements ActionListener {
 		txtChampionshipGame.setForeground(appConstants.MINITXTFOREGROUND);
 		paneGen.add(txtChampionshipGame,b);
 
-		b.gridx++;		
+		b.gridx++;
+		JLabel lStartingYear = new JLabel("Starting Year:");
+		lStartingYear.setForeground(appConstants.MINILABELFG);
+		paneGen.add(lStartingYear,b);
+		
+		b.gridx++;			
+		@SuppressWarnings("deprecation")
+		int thisYear = new Date().getYear() + 1900;
+		String[] sYears = new String[thisYear + appConstants.YEARSINTHEFUTURESTARTINGYEAR - appConstants.EARLIESTSTARTINGYEAR];
+		for (int i= 0; i < sYears.length; i++) {
+			sYears[i] = Integer.toString(i +  appConstants.EARLIESTSTARTINGYEAR);
+		}
+		
+		JComboBox comStartingYes = new JComboBox(sYears);
+		comStartingYes.setSelectedItem(Integer.toString(thisYear));
+	
+		comStartingYes.setBackground(appConstants.MINITXTBACKGROUND);
+		comStartingYes.setForeground(appConstants.MINITXTFOREGROUND);
+		paneGen.add(comStartingYes,b);
+		
+		b.gridx++;
+		paneGen.add(spacer3,b);
+		
+		b.gridx =0;
+		b.gridy++;		
 		JLabel lLeagueType = new JLabel("League Type:");
 		lLeagueType.setForeground(appConstants.MINILABELFG);
 		paneGen.add(lLeagueType,b);
@@ -216,12 +259,25 @@ public class panelNewLeague1 extends JPanel  implements ActionListener {
 	    pr1.add(remoteButton);
 		paneGen.add(pr1,b);
 		
-		
 		b.gridx++;
-		JLabel spacer3 = new JLabel("");
-		spacer3.setForeground(appConstants.MINILABELFG);
-		spacer3.setPreferredSize(new Dimension(1,appConstants.ROWHIGHTSPACER));
-		paneGen.add(spacer3,b);
+		
+		JLabel lLeagueURL = new JLabel("League URL:");
+		lLeagueURL.setForeground(appConstants.MINILABELFG);
+		paneGen.add(lLeagueURL,b);
+
+		b.gridx++;
+		b.gridwidth = 2;
+		JTextFieldLimit txtLeagueURL = new JTextFieldLimit(100);
+		txtLeagueURL.setColumns(31);
+		txtLeagueURL.setBackground(appConstants.MINITXTBACKGROUND);
+		txtLeagueURL.setForeground(appConstants.MINITXTFOREGROUND);
+		paneGen.add(txtLeagueURL,b);
+
+		b.gridwidth = 1;
+		b.gridx++;
+		paneGen.add(spacer4,b);		
+	
+		
 		
 		panCenter.add(paneGen);
 
