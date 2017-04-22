@@ -34,6 +34,8 @@ import com.bpo.cfg.application.CFGApplication;
 import com.bpo.cfg.constants.appConstants;
 import com.bpo.cfg.enums.callLeagueConfigAction;
 
+import javafx.geometry.Insets;
+
 import org.springframework.stereotype.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -90,6 +92,7 @@ public class panelNewLeague1 extends JPanel  implements ActionListener {
 		paneGen.setLayout(new GridBagLayout());
 		
 		GridBagConstraints b = new GridBagConstraints();
+
 		b.anchor = GridBagConstraints.WEST;
 		b.gridx  = 0;
 		b.gridy = 0;
@@ -133,8 +136,14 @@ public class panelNewLeague1 extends JPanel  implements ActionListener {
 
 		b.gridx++;
 		JLabel lLeagueImage = new JLabel();
-		lLeagueImage.setPreferredSize(new Dimension(30, 25));
+		lLeagueImage.setPreferredSize(new Dimension(50, 25));
 		paneGen.add(lLeagueImage,b);
+
+		b.gridx++;
+		JLabel spacer1 = new JLabel("");
+		spacer1.setForeground(appConstants.MINILABELFG);
+		spacer1.setPreferredSize(new Dimension(1,appConstants.ROWHIGHTSPACER));
+		paneGen.add(spacer1,b);
 		
 		b.gridy++;
 		b.gridx =0;
@@ -161,6 +170,12 @@ public class panelNewLeague1 extends JPanel  implements ActionListener {
 		txtLeagueEmail.setForeground(appConstants.MINITXTFOREGROUND);
 		paneGen.add(txtLeagueEmail,b);
 		
+		b.gridx++;
+		JLabel spacer2 = new JLabel("");
+		spacer2.setForeground(appConstants.MINILABELFG);
+		spacer2.setPreferredSize(new Dimension(1,appConstants.ROWHIGHTSPACER));
+		paneGen.add(spacer2,b);
+		
 		b.gridy++;
 		b.gridx =0;
 		JLabel lChampionshipGameName = new JLabel("Chanpionship Game:");
@@ -174,6 +189,11 @@ public class panelNewLeague1 extends JPanel  implements ActionListener {
 		txtChampionshipGame.setForeground(appConstants.MINITXTFOREGROUND);
 		paneGen.add(txtChampionshipGame,b);
 
+		b.gridx++;		
+		JLabel lLeagueType = new JLabel("League Type:");
+		lLeagueType.setForeground(appConstants.MINILABELFG);
+		paneGen.add(lLeagueType,b);
+		
 		b.gridx++;
 		//Create the radio buttons.
 	    JRadioButton localButton = new JRadioButton("Local");
@@ -189,11 +209,20 @@ public class panelNewLeague1 extends JPanel  implements ActionListener {
 	    ButtonGroup groupLeagueType = new ButtonGroup();
 	    groupLeagueType.add(localButton);
 	    groupLeagueType.add(remoteButton);
-
-	    paneGen.add(localButton,b);
+	   
+	    JPanel pr1 = new JPanel(new FlowLayout(FlowLayout.LEFT));
+	    pr1.setBackground(appConstants.MINIPANEBGCOLOR);
+	    pr1.add(localButton);
+	    pr1.add(remoteButton);
+		paneGen.add(pr1,b);
+		
+		
 		b.gridx++;
-	    paneGen.add(remoteButton,b);
-
+		JLabel spacer3 = new JLabel("");
+		spacer3.setForeground(appConstants.MINILABELFG);
+		spacer3.setPreferredSize(new Dimension(1,appConstants.ROWHIGHTSPACER));
+		paneGen.add(spacer3,b);
+		
 		panCenter.add(paneGen);
 
 		
