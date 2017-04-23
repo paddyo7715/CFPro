@@ -42,6 +42,7 @@ public class appConstants {
 	public static final Color FORMBTNFOREGROUNDCOLOR = Color.WHITE;
 	public static final Color FORMBTNBACKGROUNDCOLOR =  new Color(10,38,9);
 	public static final int ROWHIGHTSPACER = 30;
+	public static final Color DISABLEDINPUT = Color.DARK_GRAY;
 
 	
 //Main Menu	

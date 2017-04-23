@@ -12,6 +12,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Vector;
 
 import javax.annotation.PostConstruct;
 import javax.swing.BorderFactory;
@@ -50,6 +51,30 @@ public class panelNewLeague1 extends JPanel  implements ActionListener {
 	private JButton butCancel = new JButton("Cancel");
 	private JPanel painOKCancel = new JPanel();
 	
+//General Setting Controls
+	private JLabel lName = null;
+	private JTextFieldLimit txtName = null;
+	private JLabel lLongName = null;
+	private JTextFieldLimit txtLongName = null;
+	private JButton btnUploadImage = null;
+	private JLabel lLeagueImage = null;
+	private JLabel lCommissioner = null;
+	private JTextFieldLimit txtCommissionerName = null;
+	private JLabel lEmail = null;
+	private JTextFieldLimit txtLeagueEmail = null;
+	private JButton btnLeaguePassword = null;
+	private JLabel lChampionshipGameName = null;
+	private JTextFieldLimit txtChampionshipGame = null;
+	private JLabel lStartingYear = null;
+	private JComboBox comStartingYes = null;
+	private JLabel lLeagueType = null;
+	private JRadioButton localButton = null;
+	private JRadioButton remoteButton = null;
+	private ButtonGroup groupLeagueType = null;
+	private JLabel lLeagueURL = null;
+	private JTextFieldLimit txtLeagueURL = null;
+
+	
 	@Autowired
 	private CFGApplication cApp;
 	
@@ -86,7 +111,7 @@ public class panelNewLeague1 extends JPanel  implements ActionListener {
 		
 		JPanel panCenter = new JPanel();
 		panCenter.setBackground(appConstants.MAINBGCOLOR);
-		
+	
 		JPanel paneGen = new JPanel();
 		paneGen.setLayout(new GridBagLayout());
 		
@@ -120,31 +145,31 @@ public class panelNewLeague1 extends JPanel  implements ActionListener {
 
 		paneGen.setBackground(appConstants.MINIPANEBGCOLOR);
 
-		JLabel lName = new JLabel("League Name:");
+		lName = new JLabel("League Name:");
 		lName.setForeground(appConstants.MINILABELFG);
 		paneGen.add(lName,b);
 
 		b.gridx++;
-		JTextFieldLimit txtName = new JTextFieldLimit(6);
+		txtName = new JTextFieldLimit(6);
 		txtName.setColumns(6);
 		txtName.setBackground(appConstants.MINITXTBACKGROUND);
 		txtName.setForeground(appConstants.MINITXTFOREGROUND);
 		paneGen.add(txtName,b);
 		b.gridx++;
 		
-		JLabel lLongName = new JLabel("Long Name:");
+		lLongName = new JLabel("Long Name:");
 		lLongName.setForeground(appConstants.MINILABELFG);
 		paneGen.add(lLongName,b);
 
 		b.gridx++;
-		JTextFieldLimit txtLongName = new JTextFieldLimit(50);
+		txtLongName = new JTextFieldLimit(50);
 		txtLongName.setColumns(18);
 		txtLongName.setBackground(appConstants.MINITXTBACKGROUND);
 		txtLongName.setForeground(appConstants.MINITXTFOREGROUND);
 		paneGen.add(txtLongName,b);
 
 		b.gridx++;
-		final JButton btnUploadImage = new JButton("Upload Image");
+		btnUploadImage = new JButton("Upload Image");
 		btnUploadImage.setBackground(appConstants.FORMBTNBACKGROUNDCOLOR);
 		btnUploadImage.setForeground(appConstants.FORMBTNFOREGROUNDCOLOR);
 		btnUploadImage.setFocusable(false);
@@ -161,31 +186,31 @@ public class panelNewLeague1 extends JPanel  implements ActionListener {
 		
 		b.gridy++;
 		b.gridx =0;
-		JLabel lCommissioner = new JLabel("Commishener:");
+		lCommissioner = new JLabel("Commishener:");
 		lCommissioner.setForeground(appConstants.MINILABELFG);
 		paneGen.add(lCommissioner,b);
 
 		b.gridx++;
-		JTextFieldLimit txtCommissionerName = new JTextFieldLimit(50);
+		txtCommissionerName = new JTextFieldLimit(50);
 		txtCommissionerName.setColumns(18);
 		txtCommissionerName.setBackground(appConstants.MINITXTBACKGROUND);
 		txtCommissionerName.setForeground(appConstants.MINITXTFOREGROUND);
 		paneGen.add(txtCommissionerName,b);
 
 		b.gridx++;
-		JLabel lEmail = new JLabel("League Email:");
+		lEmail = new JLabel("League Email:");
 		lEmail.setForeground(appConstants.MINILABELFG);
 		paneGen.add(lEmail,b);
 
 		b.gridx++;
-		JTextFieldLimit txtLeagueEmail = new JTextFieldLimit(50);
+		txtLeagueEmail = new JTextFieldLimit(50);
 		txtLeagueEmail.setColumns(18);
 		txtLeagueEmail.setBackground(appConstants.MINITXTBACKGROUND);
 		txtLeagueEmail.setForeground(appConstants.MINITXTFOREGROUND);
 		paneGen.add(txtLeagueEmail,b);
 		
 		b.gridx++;
-		final JButton btnLeaguePassword = new JButton("League Password");
+		btnLeaguePassword = new JButton("League Password");
 		btnLeaguePassword.setBackground(appConstants.FORMBTNBACKGROUNDCOLOR);
 		btnLeaguePassword.setForeground(appConstants.FORMBTNFOREGROUNDCOLOR);
 		btnLeaguePassword.setFocusable(false);
@@ -197,19 +222,19 @@ public class panelNewLeague1 extends JPanel  implements ActionListener {
 		
 		b.gridy++;
 		b.gridx =0;
-		JLabel lChampionshipGameName = new JLabel("Chanpionship Game:");
+		lChampionshipGameName = new JLabel("Chanpionship Game:");
 		lChampionshipGameName.setForeground(appConstants.MINILABELFG);
 		paneGen.add(lChampionshipGameName,b);
 
 		b.gridx++;
-		JTextFieldLimit txtChampionshipGame = new JTextFieldLimit(50);
+		txtChampionshipGame = new JTextFieldLimit(50);
 		txtChampionshipGame.setColumns(18);
 		txtChampionshipGame.setBackground(appConstants.MINITXTBACKGROUND);
 		txtChampionshipGame.setForeground(appConstants.MINITXTFOREGROUND);
 		paneGen.add(txtChampionshipGame,b);
 
 		b.gridx++;
-		JLabel lStartingYear = new JLabel("Starting Year:");
+		lStartingYear = new JLabel("Starting Year:");
 		lStartingYear.setForeground(appConstants.MINILABELFG);
 		paneGen.add(lStartingYear,b);
 		
@@ -221,7 +246,7 @@ public class panelNewLeague1 extends JPanel  implements ActionListener {
 			sYears[i] = Integer.toString(i +  appConstants.EARLIESTSTARTINGYEAR);
 		}
 		
-		JComboBox comStartingYes = new JComboBox(sYears);
+		comStartingYes = new JComboBox(sYears);
 		comStartingYes.setSelectedItem(Integer.toString(thisYear));
 	
 		comStartingYes.setBackground(appConstants.MINITXTBACKGROUND);
@@ -233,23 +258,27 @@ public class panelNewLeague1 extends JPanel  implements ActionListener {
 		
 		b.gridx =0;
 		b.gridy++;		
-		JLabel lLeagueType = new JLabel("League Type:");
+		lLeagueType = new JLabel("League Type:");
 		lLeagueType.setForeground(appConstants.MINILABELFG);
 		paneGen.add(lLeagueType,b);
 		
 		b.gridx++;
 		//Create the radio buttons.
-	    JRadioButton localButton = new JRadioButton("Local");
+	    localButton = new JRadioButton("Local");
 	    localButton.setSelected(true);
+	    localButton.setFocusable(false);
+	    localButton.addActionListener(this);
 	    localButton.setForeground(appConstants.MINIPANERADIOFGCOLOR);
 	    localButton.setBackground(appConstants.MINIPANERADIOBGCOLOR);
 
-	    JRadioButton remoteButton = new JRadioButton("Remote");
+	    remoteButton = new JRadioButton("Remote");
+	    remoteButton.setFocusable(false);
+	    remoteButton.addActionListener(this);
 	    remoteButton.setForeground(appConstants.MINIPANERADIOFGCOLOR);
 	    remoteButton.setBackground(appConstants.MINIPANERADIOBGCOLOR);
 	    
 	    //Group the radio buttons.
-	    ButtonGroup groupLeagueType = new ButtonGroup();
+	    groupLeagueType = new ButtonGroup();
 	    groupLeagueType.add(localButton);
 	    groupLeagueType.add(remoteButton);
 	   
@@ -261,13 +290,13 @@ public class panelNewLeague1 extends JPanel  implements ActionListener {
 		
 		b.gridx++;
 		
-		JLabel lLeagueURL = new JLabel("League URL:");
+		lLeagueURL = new JLabel("League URL:");
 		lLeagueURL.setForeground(appConstants.MINILABELFG);
 		paneGen.add(lLeagueURL,b);
 
 		b.gridx++;
 		b.gridwidth = 2;
-		JTextFieldLimit txtLeagueURL = new JTextFieldLimit(100);
+		txtLeagueURL = new JTextFieldLimit(100);
 		txtLeagueURL.setColumns(31);
 		txtLeagueURL.setBackground(appConstants.MINITXTBACKGROUND);
 		txtLeagueURL.setForeground(appConstants.MINITXTFOREGROUND);
@@ -276,13 +305,8 @@ public class panelNewLeague1 extends JPanel  implements ActionListener {
 		b.gridwidth = 1;
 		b.gridx++;
 		paneGen.add(spacer4,b);		
-	
-		
 		
 		panCenter.add(paneGen);
-
-		
-		
 		
         add(panCenter,  BorderLayout.CENTER);
         
@@ -312,6 +336,7 @@ public class panelNewLeague1 extends JPanel  implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 
+//If Save or Cancel buttons are clicked		
 		if (arg0.getSource() == butCancel)
 		{
 			cfpJFrame cfgf = (cfpJFrame)SwingUtilities.getAncestorOfClass(cfpJFrame.class, this);
@@ -328,6 +353,19 @@ public class panelNewLeague1 extends JPanel  implements ActionListener {
 				cardLayout.show(cfgf.cards, "main Menu");		
 			}
 		}
+		
+//General Settings Pane event listeners
+		if (arg0.getSource() == localButton) {
+			txtLeagueURL.setText("");
+			txtLeagueURL.setEnabled(false);
+			txtLeagueURL.setBackground(appConstants.DISABLEDINPUT);
+		} else if (arg0.getSource() == remoteButton) {
+			txtLeagueURL.setEnabled(true);
+			txtLeagueURL.setBackground(appConstants.MINITXTBACKGROUND);
+		}
+		
+		
+		
 		
 		
 	}
