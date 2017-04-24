@@ -31,6 +31,7 @@ import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
+import javax.swing.JComponent;
 
 import com.bpo.cfg.application.CFGApplication;
 import com.bpo.cfg.constants.appConstants;
@@ -53,26 +54,27 @@ public class panelNewLeague1 extends JPanel  implements ActionListener {
 	
 //General Setting Controls
 	private JLabel lName = null;
-	private JTextFieldLimit txtName = null;
+	private customTextField txtName = null;
 	private JLabel lLongName = null;
-	private JTextFieldLimit txtLongName = null;
+	private customTextField txtLongName = null;
 	private JButton btnUploadImage = null;
 	private JLabel lLeagueImage = null;
 	private JLabel lCommissioner = null;
-	private JTextFieldLimit txtCommissionerName = null;
+	private customTextField txtCommissionerName = null;
 	private JLabel lEmail = null;
-	private JTextFieldLimit txtLeagueEmail = null;
+	private customTextField txtLeagueEmail = null;
 	private JButton btnLeaguePassword = null;
 	private JLabel lChampionshipGameName = null;
-	private JTextFieldLimit txtChampionshipGame = null;
+	private customTextField txtChampionshipGame = null;
 	private JLabel lStartingYear = null;
-	private JComboBox comStartingYes = null;
+	private customJComboBox comStartingYes = null;
 	private JLabel lLeagueType = null;
 	private JRadioButton localButton = null;
 	private JRadioButton remoteButton = null;
 	private ButtonGroup groupLeagueType = null;
 	private JLabel lLeagueURL = null;
-	private JTextFieldLimit txtLeagueURL = null;
+	private customTextField txtLeagueURL = null;
+	private String LeaguePassword = null;
 
 	
 	@Autowired
@@ -150,9 +152,8 @@ public class panelNewLeague1 extends JPanel  implements ActionListener {
 		paneGen.add(lName,b);
 
 		b.gridx++;
-		txtName = new JTextFieldLimit(6);
+		txtName = new customTextField(6, appConstants.MINITXTBACKGROUND, appConstants.DISABLEDINPUT);
 		txtName.setColumns(6);
-		txtName.setBackground(appConstants.MINITXTBACKGROUND);
 		txtName.setForeground(appConstants.MINITXTFOREGROUND);
 		paneGen.add(txtName,b);
 		b.gridx++;
@@ -162,9 +163,8 @@ public class panelNewLeague1 extends JPanel  implements ActionListener {
 		paneGen.add(lLongName,b);
 
 		b.gridx++;
-		txtLongName = new JTextFieldLimit(50);
+		txtLongName = new customTextField(50, appConstants.MINITXTBACKGROUND, appConstants.DISABLEDINPUT);
 		txtLongName.setColumns(18);
-		txtLongName.setBackground(appConstants.MINITXTBACKGROUND);
 		txtLongName.setForeground(appConstants.MINITXTFOREGROUND);
 		paneGen.add(txtLongName,b);
 
@@ -191,9 +191,8 @@ public class panelNewLeague1 extends JPanel  implements ActionListener {
 		paneGen.add(lCommissioner,b);
 
 		b.gridx++;
-		txtCommissionerName = new JTextFieldLimit(50);
+		txtCommissionerName = new customTextField(50, appConstants.MINITXTBACKGROUND, appConstants.DISABLEDINPUT);
 		txtCommissionerName.setColumns(18);
-		txtCommissionerName.setBackground(appConstants.MINITXTBACKGROUND);
 		txtCommissionerName.setForeground(appConstants.MINITXTFOREGROUND);
 		paneGen.add(txtCommissionerName,b);
 
@@ -203,9 +202,8 @@ public class panelNewLeague1 extends JPanel  implements ActionListener {
 		paneGen.add(lEmail,b);
 
 		b.gridx++;
-		txtLeagueEmail = new JTextFieldLimit(50);
+		txtLeagueEmail = new customTextField(50, appConstants.MINITXTBACKGROUND, appConstants.DISABLEDINPUT);
 		txtLeagueEmail.setColumns(18);
-		txtLeagueEmail.setBackground(appConstants.MINITXTBACKGROUND);
 		txtLeagueEmail.setForeground(appConstants.MINITXTFOREGROUND);
 		paneGen.add(txtLeagueEmail,b);
 		
@@ -215,6 +213,7 @@ public class panelNewLeague1 extends JPanel  implements ActionListener {
 		btnLeaguePassword.setForeground(appConstants.FORMBTNFOREGROUNDCOLOR);
 		btnLeaguePassword.setFocusable(false);
 		btnLeaguePassword.setPreferredSize(new Dimension(140,20));
+		btnLeaguePassword.addActionListener(this);
 		paneGen.add(btnLeaguePassword,b);
 		
 		b.gridx++;
@@ -227,7 +226,7 @@ public class panelNewLeague1 extends JPanel  implements ActionListener {
 		paneGen.add(lChampionshipGameName,b);
 
 		b.gridx++;
-		txtChampionshipGame = new JTextFieldLimit(50);
+		txtChampionshipGame = new customTextField(50, appConstants.MINITXTBACKGROUND, appConstants.DISABLEDINPUT);
 		txtChampionshipGame.setColumns(18);
 		txtChampionshipGame.setBackground(appConstants.MINITXTBACKGROUND);
 		txtChampionshipGame.setForeground(appConstants.MINITXTFOREGROUND);
@@ -246,10 +245,8 @@ public class panelNewLeague1 extends JPanel  implements ActionListener {
 			sYears[i] = Integer.toString(i +  appConstants.EARLIESTSTARTINGYEAR);
 		}
 		
-		comStartingYes = new JComboBox(sYears);
+		comStartingYes = new customJComboBox(sYears, appConstants.MINITXTBACKGROUND, appConstants.DISABLEDINPUT);
 		comStartingYes.setSelectedItem(Integer.toString(thisYear));
-	
-		comStartingYes.setBackground(appConstants.MINITXTBACKGROUND);
 		comStartingYes.setForeground(appConstants.MINITXTFOREGROUND);
 		paneGen.add(comStartingYes,b);
 		
@@ -296,9 +293,8 @@ public class panelNewLeague1 extends JPanel  implements ActionListener {
 
 		b.gridx++;
 		b.gridwidth = 2;
-		txtLeagueURL = new JTextFieldLimit(100);
+		txtLeagueURL = new customTextField(100, appConstants.MINITXTBACKGROUND, appConstants.DISABLEDINPUT);
 		txtLeagueURL.setColumns(31);
-		txtLeagueURL.setBackground(appConstants.MINITXTBACKGROUND);
 		txtLeagueURL.setForeground(appConstants.MINITXTFOREGROUND);
 		paneGen.add(txtLeagueURL,b);
 
@@ -358,11 +354,18 @@ public class panelNewLeague1 extends JPanel  implements ActionListener {
 		if (arg0.getSource() == localButton) {
 			txtLeagueURL.setText("");
 			txtLeagueURL.setEnabled(false);
-			txtLeagueURL.setBackground(appConstants.DISABLEDINPUT);
 		} else if (arg0.getSource() == remoteButton) {
 			txtLeagueURL.setEnabled(true);
-			txtLeagueURL.setBackground(appConstants.MINITXTBACKGROUND);
 		}
+		
+		if (arg0.getSource() == btnLeaguePassword) {
+			cfpJFrame cfgf = (cfpJFrame)SwingUtilities.getAncestorOfClass(cfpJFrame.class, panelNewLeague1.this);
+			customPasswordDialog custpw = new customPasswordDialog(cfgf);
+			custpw.setVisible(true);
+			if (custpw.getErrormsg() == null || custpw.getPassword() != null)
+				LeaguePassword = custpw.getPassword();
+			
+		}		
 		
 		
 		

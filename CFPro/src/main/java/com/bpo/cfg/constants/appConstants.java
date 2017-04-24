@@ -7,9 +7,12 @@ public class appConstants {
 //Constatnts
 	public static final int EARLIESTSTARTINGYEAR = 1800;
 	public static final int YEARSINTHEFUTURESTARTINGYEAR = 100;
+	public static final int MINPASSWORDLENGTH = 8;
+	public static final int MAXPASSWORDLENGTH = 12;
 	
 //Common GUI elements
 	public static final Color MBACKGROUNDCOLOR = Color.BLUE;
+	public static final Color ALERTCOLOR = Color.RED;
 	
 	public static final Color MFORGROUNDCOLORTITLE = Color.LIGHT_GRAY;
 	
