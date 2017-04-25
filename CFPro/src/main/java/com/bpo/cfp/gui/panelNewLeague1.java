@@ -360,7 +360,7 @@ public class panelNewLeague1 extends JPanel  implements ActionListener {
 		
 		if (arg0.getSource() == btnLeaguePassword) {
 			cfpJFrame cfgf = (cfpJFrame)SwingUtilities.getAncestorOfClass(cfpJFrame.class, panelNewLeague1.this);
-			customPasswordDialog custpw = new customPasswordDialog(cfgf);
+			customPasswordDialog custpw = new customPasswordDialog(cfgf, btnLeaguePassword.getX(), btnLeaguePassword.getY());
 			custpw.setVisible(true);
 			if (custpw.getErrormsg() == null || custpw.getPassword() != null)
 				LeaguePassword = custpw.getPassword();

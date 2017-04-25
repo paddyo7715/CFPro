@@ -47,6 +47,9 @@ public class appConstants {
 	public static final int ROWHIGHTSPACER = 30;
 	public static final Color DISABLEDINPUT = Color.DARK_GRAY;
 
+//New Password dialog 
+	public static final Color DIALOGBORDERCOLOR = Color.DARK_GRAY;
+	
 	
 //Main Menu	
 	public static final int MAINIMAGEWIDTH = 500;
