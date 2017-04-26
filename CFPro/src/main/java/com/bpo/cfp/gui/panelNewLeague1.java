@@ -10,10 +10,13 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.ColorModel;
+import java.io.File;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Vector;
 
+import javax.accessibility.AccessibleContext;
 import javax.annotation.PostConstruct;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -31,11 +34,14 @@ import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.filechooser.FileSystemView;
 import javax.swing.JComponent;
 
 import com.bpo.cfg.application.CFGApplication;
 import com.bpo.cfg.constants.appConstants;
 import com.bpo.cfg.enums.callLeagueConfigAction;
+import com.sun.xml.internal.ws.api.server.Container;
 
 import java.awt.Insets;
 
@@ -174,6 +180,7 @@ public class panelNewLeague1 extends JPanel  implements ActionListener {
 		btnUploadImage.setForeground(appConstants.FORMBTNFOREGROUNDCOLOR);
 		btnUploadImage.setFocusable(false);
 		btnUploadImage.setPreferredSize(new Dimension(140,20));
+		btnUploadImage.addActionListener(this);
 		paneGen.add(btnUploadImage,b);
 
 		b.gridx++;
@@ -366,7 +373,28 @@ public class panelNewLeague1 extends JPanel  implements ActionListener {
 				LeaguePassword = custpw.getPassword();
 			
 		}		
-		
+//Upload league image		
+		if (arg0.getSource() == btnUploadImage) {
+
+			cfpJFrame cfgf = (cfpJFrame)SwingUtilities.getAncestorOfClass(cfpJFrame.class, panelNewLeague1.this);
+		    JFileChooser chooser = new JFileChooser();
+		    chooser.setBackground(appConstants.MINIPANEBGCOLOR);
+		    FileSystemView cont = null;
+
+		   
+		    chooser.setBackground(appConstants.MINIPANEBGCOLOR);
+		    FileNameExtensionFilter filter = new FileNameExtensionFilter(
+		        "JPG & GIF Images", "jpg", "gif");
+		    chooser.setFileFilter(filter);
+		    int returnVal = chooser.showOpenDialog(cfgf);
+		    if(returnVal == JFileChooser.APPROVE_OPTION) {
+		       System.out.println("You chose to open this file: " +
+		            chooser.getSelectedFile().getName());
+		    }
+			
+			
+			
+		}
 		
 		
 		
