@@ -375,25 +375,9 @@ public class panelNewLeague1 extends JPanel  implements ActionListener {
 		}		
 //Upload league image		
 		if (arg0.getSource() == btnUploadImage) {
-
 			cfpJFrame cfgf = (cfpJFrame)SwingUtilities.getAncestorOfClass(cfpJFrame.class, panelNewLeague1.this);
-		    JFileChooser chooser = new JFileChooser();
-		    chooser.setBackground(appConstants.MINIPANEBGCOLOR);
-		    FileSystemView cont = null;
-
-		   
-		    chooser.setBackground(appConstants.MINIPANEBGCOLOR);
-		    FileNameExtensionFilter filter = new FileNameExtensionFilter(
-		        "JPG & GIF Images", "jpg", "gif");
-		    chooser.setFileFilter(filter);
-		    int returnVal = chooser.showOpenDialog(cfgf);
-		    if(returnVal == JFileChooser.APPROVE_OPTION) {
-		       System.out.println("You chose to open this file: " +
-		            chooser.getSelectedFile().getName());
-		    }
-			
-			
-			
+			customFileChooser chooser = new customFileChooser(cfgf, btnUploadImage.getX(), btnUploadImage.getY(), false,"Upload League Image");
+			chooser.setVisible(true);
 		}
 		
 		
