@@ -9,6 +9,14 @@ import javax.swing.filechooser.FileSystemView;
 
 public class Utility_Functions {
 	
+	public static boolean isFolder(String s) {
+		boolean r = false;
+	
+		File d = new File(s);
+		return d.isDirectory();
+	
+	}
+	
 	public static String[] getFilesandFolders(String d) {
 
 		File dir = new File(d + "/");

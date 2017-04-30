@@ -376,7 +376,7 @@ public class panelNewLeague1 extends JPanel  implements ActionListener {
 //Upload league image		
 		if (arg0.getSource() == btnUploadImage) {
 			cfpJFrame cfgf = (cfpJFrame)SwingUtilities.getAncestorOfClass(cfpJFrame.class, panelNewLeague1.this);
-			customFileChooser chooser = new customFileChooser(cfgf, btnUploadImage.getX(), btnUploadImage.getY(), false,"Upload League Image");
+			customFileChooser chooser = new customFileChooser(cfgf, btnUploadImage.getX(), btnUploadImage.getY(), false,"Upload League Image", cApp.getAi().getImgFolder());
 			chooser.setVisible(true);
 		}
 		

@@ -9,6 +9,7 @@ import java.awt.GridBagLayout;
 
 import javax.swing.BorderFactory;
 import javax.swing.DefaultListCellRenderer;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
@@ -22,6 +23,7 @@ import com.bpo.cfg.constants.appConstants;
 import com.bpo.cfg.utilities.Utility_Functions;
 import com.sun.prism.Graphics;
 
+import javafx.scene.control.ScrollBar;
 import javafx.scene.text.Font;
 
 import java.awt.Insets;
@@ -37,15 +39,21 @@ public class customFileChooser extends JDialog {
 	private JList lstFiles = null;
     private JButton btnOK;
     private JButton btnCancel;
+    private String path = null;
 	
-	public customFileChooser(Frame parent, int xloc, int yloc, boolean bjustfolders, String Title)
+	public String getPath() {
+		return path;
+	}
+
+	public customFileChooser(Frame parent, int xloc, int yloc, boolean bjustfolders, String Title, ImageIcon imgFoldedr)
 	{
 	    super(parent, Title, true);
 	    
 	    ArrayList ad = Utility_Functions.getalldrives();
 	    String fulldrive = (String) ad.get(0);
 	    String drive = (String) fulldrive.subSequence(0, fulldrive.indexOf(":") + 1);
-	    String[] f = Utility_Functions.getFilesandFolders(drive);
+	    path = drive + "/";
+	    String[] f = Utility_Functions.getFilesandFolders(path);
 	    
 	    JPanel panel = new JPanel(new GridBagLayout());
         panel.setBackground(appConstants.MINIPANERADIOBGCOLOR);
@@ -82,13 +90,17 @@ public class customFileChooser extends JDialog {
 	    cs.gridy++;
 	    cs.gridwidth = 2;
 	    lstFiles = new JList(f);
+
 	    lstFiles.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 	    lstFiles.setPreferredSize(new Dimension(300,200));
 	    lstFiles.setForeground(appConstants.MINIBORDERCOLOR);
 	    lstFiles.setBackground(appConstants.MAINBGCOLOR);
 	    JScrollPane listScroller = new JScrollPane();
 	    listScroller.setViewportView(lstFiles);
+
 	    lstFiles.setLayoutOrientation(JList.VERTICAL);
+	    lstFiles.setCellRenderer(new IconListRenderer(imgFoldedr, this));
+
 
 	    panel.add(listScroller, cs);
 	    cs.gridwidth = 1;

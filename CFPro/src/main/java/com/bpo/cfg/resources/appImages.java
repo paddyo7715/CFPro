@@ -17,6 +17,7 @@ public class appImages {
 	private ImageIcon imgRemoteGame;
 	private ImageIcon imgRemoteLeague;
 	private ImageIcon imgExit;
+	private ImageIcon imgFolder;
 	
 	public appImages()
 	{
@@ -30,6 +31,8 @@ public class appImages {
 		imgRemoteGame = new ImageIcon(CFGApplication.curDir + "/images/playremotegame.png"); 
 		imgRemoteLeague = new ImageIcon(CFGApplication.curDir + "/images/remoteleagues.png"); 
 		imgExit = new ImageIcon(CFGApplication.curDir + "/images/exit.png"); 
+		imgFolder = new ImageIcon(CFGApplication.curDir + "/images/folder-yellow_T.png"); 
+		
 	}
 	
 
@@ -67,6 +70,11 @@ public class appImages {
 
 	public ImageIcon getImgMonitorBase() {
 		return imgMonitorBase;
+	}
+
+
+	public ImageIcon getImgFolder() {
+		return imgFolder;
 	}
 
 
