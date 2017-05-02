@@ -2,7 +2,9 @@ package com.bpo.cfg.utilities;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Vector;
 
 import javax.swing.filechooser.FileSystemView;
@@ -20,8 +22,30 @@ public class Utility_Functions {
 	public static String[] getFilesandFolders(String d) {
 
 		File dir = new File(d + "/");
-		String[] files = dir.list();
-		return files;
+		File[] files = dir.listFiles();
+		Comparator comp = new Comparator() {
+			  public int compare(Object o1, Object o2) {
+			    File f1 = (File) o1;
+			    File f2 = (File) o2;
+			    if (f1.isDirectory() && !f2.isDirectory()) {
+			      // Directory before non-directory
+			      return -1;
+			    } else if (!f1.isDirectory() && f2.isDirectory()) {
+			      // Non-directory after directory
+			      return 1;
+			    } else {
+			      // Alphabetic order otherwise
+			      return ((File) o1).compareTo((File) o2);
+			    }
+			  }
+			};
+			Arrays.sort(files,comp);
+			String[] names = new String[files.length];
+			for (int i = 0; i < files.length; i++) {
+				names[i] = files[i].getName();
+			}
+
+			return names;
 	}
 	
 	public static ArrayList<String> getalldrives() {

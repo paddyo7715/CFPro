@@ -9,6 +9,7 @@ import java.awt.GridBagLayout;
 
 import javax.swing.BorderFactory;
 import javax.swing.DefaultListCellRenderer;
+import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -29,6 +30,8 @@ import javafx.scene.text.Font;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 public class customFileChooser extends JDialog {
@@ -40,6 +43,7 @@ public class customFileChooser extends JDialog {
     private JButton btnOK;
     private JButton btnCancel;
     private String path = null;
+    private DefaultListModel model = null;
 	
 	public String getPath() {
 		return path;
@@ -89,7 +93,11 @@ public class customFileChooser extends JDialog {
 	    cs.gridx = 0;
 	    cs.gridy++;
 	    cs.gridwidth = 2;
-	    lstFiles = new JList(f);
+	    model = new DefaultListModel();
+	    for (String ff : f)
+	    	model.addElement(ff);
+	    
+	    lstFiles = new JList(model);
 
 	    lstFiles.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 	    lstFiles.setPreferredSize(new Dimension(300,200));
@@ -100,6 +108,19 @@ public class customFileChooser extends JDialog {
 
 	    lstFiles.setLayoutOrientation(JList.VERTICAL);
 	    lstFiles.setCellRenderer(new IconListRenderer(imgFoldedr, this));
+	    lstFiles.addMouseListener(new MouseAdapter() {
+	        public void mouseClicked(MouseEvent evt) {
+	            JList list = (JList)evt.getSource();
+	            if (evt.getClickCount() == 2) {
+	                int index = list.locationToIndex(evt.getPoint());
+	        	    path += list.getSelectedValue();
+	        	    String[] f = Utility_Functions.getFilesandFolders(path);
+	        	    for (String ff : f)
+	        	    	model.addElement(ff);	        	  
+	            }
+	        }
+	    });
+
 
 
 	    panel.add(listScroller, cs);
