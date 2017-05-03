@@ -44,6 +44,7 @@ public class customFileChooser extends JDialog {
     private JButton btnCancel;
     private String path = null;
     private DefaultListModel model = null;
+    private JLabel lerrorMessage;
 	
 	public String getPath() {
 		return path;
@@ -58,7 +59,8 @@ public class customFileChooser extends JDialog {
 	    String drive = (String) fulldrive.subSequence(0, fulldrive.indexOf(":") + 1);
 	    path = drive + "/";
 	    String[] f = Utility_Functions.getFilesandFolders(path);
-	    
+	    ArrayList g = new ArrayList();
+	   
 	    JPanel panel = new JPanel(new GridBagLayout());
         panel.setBackground(appConstants.MINIPANERADIOBGCOLOR);
 	    GridBagConstraints cs = new GridBagConstraints();
@@ -113,10 +115,13 @@ public class customFileChooser extends JDialog {
 	            JList list = (JList)evt.getSource();
 	            if (evt.getClickCount() == 2) {
 	                int index = list.locationToIndex(evt.getPoint());
-	        	    path += list.getSelectedValue();
+	        	    path = path + list.getSelectedValue() + "/";
 	        	    String[] f = Utility_Functions.getFilesandFolders(path);
+	        	    model = new DefaultListModel();
 	        	    for (String ff : f)
-	        	    	model.addElement(ff);	        	  
+	        	    	model.addElement(ff);  
+	        	    lstFiles.setModel(model);
+
 	            }
 	        }
 	    });
@@ -124,6 +129,14 @@ public class customFileChooser extends JDialog {
 
 
 	    panel.add(listScroller, cs);
+	    cs.gridwidth = 1;
+	    
+	    lerrorMessage = new JLabel("      ");
+	    lerrorMessage.setForeground(appConstants.ALERTCOLOR);
+	    cs.gridx = 0;
+	    cs.gridy++;
+	    cs.gridwidth = 3;
+	    panel.add(lerrorMessage, cs);
 	    cs.gridwidth = 1;
 	    
 	    getRootPane().setBorder( BorderFactory.createRaisedBevelBorder());

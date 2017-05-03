@@ -9,6 +9,8 @@ import java.util.Vector;
 
 import javax.swing.filechooser.FileSystemView;
 
+import com.sun.xml.internal.bind.v2.schemagen.xmlschema.List;
+
 public class Utility_Functions {
 	
 	public static boolean isFolder(String s) {
@@ -21,7 +23,7 @@ public class Utility_Functions {
 	
 	public static String[] getFilesandFolders(String d) {
 
-		File dir = new File(d + "/");
+		File dir = new File(d);
 		File[] files = dir.listFiles();
 		Comparator comp = new Comparator() {
 			  public int compare(Object o1, Object o2) {
@@ -40,12 +42,14 @@ public class Utility_Functions {
 			  }
 			};
 			Arrays.sort(files,comp);
-			String[] names = new String[files.length];
+			ArrayList<String> a = new ArrayList();
+			a.add("..");
 			for (int i = 0; i < files.length; i++) {
-				names[i] = files[i].getName();
+				a.add(files[i].getName());
 			}
 
-			return names;
+			String[] b = a.toArray(new String[a.size()]);
+			return b;
 	}
 	
 	public static ArrayList<String> getalldrives() {
