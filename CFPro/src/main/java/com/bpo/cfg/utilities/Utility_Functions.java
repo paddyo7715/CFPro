@@ -45,7 +45,8 @@ public class Utility_Functions {
 			ArrayList<String> a = new ArrayList();
 			a.add("..");
 			for (int i = 0; i < files.length; i++) {
-				a.add(files[i].getName());
+				if (files[i].exists() && files[i].isAbsolute())
+					a.add(files[i].getName());
 			}
 
 			String[] b = a.toArray(new String[a.size()]);

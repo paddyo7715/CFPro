@@ -57,7 +57,7 @@ public class customFileChooser extends JDialog {
 	    ArrayList ad = Utility_Functions.getalldrives();
 	    String fulldrive = (String) ad.get(0);
 	    String drive = (String) fulldrive.subSequence(0, fulldrive.indexOf(":") + 1);
-	    path = drive + "/";
+	    path = drive + "\\";
 	    String[] f = Utility_Functions.getFilesandFolders(path);
 	    ArrayList g = new ArrayList();
 	   
@@ -109,13 +109,13 @@ public class customFileChooser extends JDialog {
 	    listScroller.setViewportView(lstFiles);
 
 	    lstFiles.setLayoutOrientation(JList.VERTICAL);
-	    lstFiles.setCellRenderer(new IconListRenderer(imgFoldedr, this));
+//	    lstFiles.setCellRenderer(new IconListRenderer(imgFoldedr, this));
 	    lstFiles.addMouseListener(new MouseAdapter() {
 	        public void mouseClicked(MouseEvent evt) {
 	            JList list = (JList)evt.getSource();
 	            if (evt.getClickCount() == 2) {
 	                int index = list.locationToIndex(evt.getPoint());
-	        	    path = path + list.getSelectedValue() + "/";
+	        	    path = path + list.getSelectedValue() + "\\";
 	        	    String[] f = Utility_Functions.getFilesandFolders(path);
 	        	    model = new DefaultListModel();
 	        	    for (String ff : f)
