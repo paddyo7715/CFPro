@@ -96,20 +96,18 @@ public class customFileChooser extends JDialog {
 	    cs.gridy++;
 	    cs.gridwidth = 2;
 	    model = new DefaultListModel();
-	    for (String ff : f)
-	    	model.addElement(ff);
+
 	    
 	    lstFiles = new JList(model);
-
 	    lstFiles.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-	    lstFiles.setPreferredSize(new Dimension(300,200));
+//	    lstFiles.setPreferredSize(new Dimension(300,200));
 	    lstFiles.setForeground(appConstants.MINIBORDERCOLOR);
 	    lstFiles.setBackground(appConstants.MAINBGCOLOR);
-	    JScrollPane listScroller = new JScrollPane();
-	    listScroller.setViewportView(lstFiles);
+	    JScrollPane listScroller = new JScrollPane(lstFiles);
+//	    listScroller.setViewportView(lstFiles);
 
-	    lstFiles.setLayoutOrientation(JList.VERTICAL);
-//	    lstFiles.setCellRenderer(new IconListRenderer(imgFoldedr, this));
+//	    lstFiles.setLayoutOrientation(JList.VERTICAL);
+	    lstFiles.setCellRenderer(new IconListRenderer(imgFoldedr, this));
 	    lstFiles.addMouseListener(new MouseAdapter() {
 	        public void mouseClicked(MouseEvent evt) {
 	            JList list = (JList)evt.getSource();
@@ -125,8 +123,10 @@ public class customFileChooser extends JDialog {
 	            }
 	        }
 	    });
-
-
+	    for (String ff : f)
+	    	model.addElement(ff);
+//	    for (int i=0; i < 30; i++)
+//	    	model.addElement("Element " + i);
 
 	    panel.add(listScroller, cs);
 	    cs.gridwidth = 1;
