@@ -59,7 +59,7 @@ public class customFileChooser extends JDialog {
 	    String drive = (String) fulldrive.subSequence(0, fulldrive.indexOf(":") + 1);
 	    path = drive + "\\";
 	    String[] f = Utility_Functions.getFilesandFolders(path);
-	    ArrayList g = new ArrayList();
+//	    ArrayList g = new ArrayList();
 	   
 	    JPanel panel = new JPanel(new GridBagLayout());
         panel.setBackground(appConstants.MINIPANERADIOBGCOLOR);
@@ -89,6 +89,18 @@ public class customFileChooser extends JDialog {
 	    cboDrive.setForeground(appConstants.MINIBORDERCOLOR);
 	    cboDrive.setBackground(appConstants.MAINBGCOLOR);
 	    cboDrive.setFocusable(false);
+	    cboDrive.addActionListener (new ActionListener () {
+	        public void actionPerformed(ActionEvent e) {
+	            JComboBox cb = (JComboBox)e.getSource();
+	            String fulldrive = (String)cb.getSelectedItem();
+	    	    String drive = (String) fulldrive.subSequence(0, fulldrive.indexOf(":") + 1);
+	    	    path = drive + "\\";
+	    	    String[] f = Utility_Functions.getFilesandFolders(path);
+	    	    model.clear();
+	    	    for (String ff : f)
+	    	    	model.addElement(ff);
+	        }
+	    });
 
 	    panel.add(cboDrive, cs);
 	    
@@ -105,7 +117,7 @@ public class customFileChooser extends JDialog {
 	    lstFiles.setBackground(appConstants.MAINBGCOLOR);
 	    JScrollPane listScroller = new JScrollPane(lstFiles);
 //	    listScroller.setViewportView(lstFiles);
-
+	    lstFiles.setVisibleRowCount(10);
 //	    lstFiles.setLayoutOrientation(JList.VERTICAL);
 	    lstFiles.setCellRenderer(new IconListRenderer(imgFoldedr, this));
 	    lstFiles.addMouseListener(new MouseAdapter() {
@@ -125,8 +137,6 @@ public class customFileChooser extends JDialog {
 	    });
 	    for (String ff : f)
 	    	model.addElement(ff);
-//	    for (int i=0; i < 30; i++)
-//	    	model.addElement("Element " + i);
 
 	    panel.add(listScroller, cs);
 	    cs.gridwidth = 1;

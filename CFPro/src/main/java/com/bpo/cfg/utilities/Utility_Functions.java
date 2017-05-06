@@ -66,7 +66,8 @@ public class Utility_Functions {
 		for(File path:paths)
 		{
 		    // prints file and directory paths
-		    r.add(path + " " + fsv.getSystemTypeDescription(path));
+		    if (path.canRead() )
+		    	r.add(path + " " + fsv.getSystemTypeDescription(path));
 		}
 		return r;
 	}
