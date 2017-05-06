@@ -287,7 +287,7 @@ public class GameEngine {
 	}
 	public static void main(String  args[])
 	{
-		GameEngine ge = new GameEngine(1, "Boston", "Colonials", 2, "Detroit", "Turbos", false, false, "Regualr Season Game","#111111", "#111111", "#111111", "#222222", "#222222", "#222222");
+//		GameEngine ge = new GameEngine(1, "Boston", "Colonials", 2, "Detroit", "Turbos", false, false, "Regualr Season Game","#111111", "#111111", "#111111", "#222222", "#222222", "#222222");
 
 		
 		
