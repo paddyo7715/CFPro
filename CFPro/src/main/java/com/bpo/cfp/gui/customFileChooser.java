@@ -19,6 +19,7 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
+import javax.swing.ScrollPaneConstants;
 
 import com.bpo.cfg.constants.appConstants;
 import com.bpo.cfg.utilities.Utility_Functions;
@@ -112,20 +113,18 @@ public class customFileChooser extends JDialog {
 	    
 	    lstFiles = new JList(model);
 	    lstFiles.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-//	    lstFiles.setPreferredSize(new Dimension(300,200));
 	    lstFiles.setForeground(appConstants.MINIBORDERCOLOR);
 	    lstFiles.setBackground(appConstants.MAINBGCOLOR);
 	    JScrollPane listScroller = new JScrollPane(lstFiles);
-//	    listScroller.setViewportView(lstFiles);
+	    listScroller.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 	    lstFiles.setVisibleRowCount(10);
-//	    lstFiles.setLayoutOrientation(JList.VERTICAL);
 	    lstFiles.setCellRenderer(new IconListRenderer(imgFoldedr, this));
 	    lstFiles.addMouseListener(new MouseAdapter() {
 	        public void mouseClicked(MouseEvent evt) {
 	            JList list = (JList)evt.getSource();
 	            if (evt.getClickCount() == 2) {
 	                int index = list.locationToIndex(evt.getPoint());
-	        	    path = path + list.getSelectedValue() + "\\";
+	        	    path = path + list.getSelectedValue().toString().trim() + "\\";
 	        	    String[] f = Utility_Functions.getFilesandFolders(path);
 	        	    model = new DefaultListModel();
 	        	    for (String ff : f)

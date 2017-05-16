@@ -43,10 +43,11 @@ public class Utility_Functions {
 			};
 			Arrays.sort(files,comp);
 			ArrayList<String> a = new ArrayList();
-			a.add("..");
+			a.add("..                                                                                ");
 			for (int i = 0; i < files.length; i++) {
-				if (files[i].exists() && files[i].isAbsolute())
-					a.add(files[i].getName());
+				if (!files[i].exists() || !files[i].isAbsolute() || files[i].isHidden() ) continue;
+				if (files[i].isDirectory() && files[i].listFiles() == null) continue;
+				a.add(files[i].getName());
 			}
 
 			String[] b = a.toArray(new String[a.size()]);
