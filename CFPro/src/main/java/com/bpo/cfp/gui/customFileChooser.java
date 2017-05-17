@@ -46,22 +46,36 @@ public class customFileChooser extends JDialog {
     private String path = null;
     private DefaultListModel model = null;
     private JLabel lerrorMessage;
+    private ArrayList ad = null;
 	
 	public String getPath() {
 		return path;
 	}
-
-	public customFileChooser(Frame parent, int xloc, int yloc, boolean bjustfolders, String Title, ImageIcon imgFoldedr)
+	
+	private void setToMainDrive()
 	{
-	    super(parent, Title, true);
-	    
-	    ArrayList ad = Utility_Functions.getalldrives();
+		ad = Utility_Functions.getalldrives();
 	    String fulldrive = (String) ad.get(0);
 	    String drive = (String) fulldrive.subSequence(0, fulldrive.indexOf(":") + 1);
 	    path = drive + "\\";
+	}
+
+	private void changeList()
+	{
 	    String[] f = Utility_Functions.getFilesandFolders(path);
-//	    ArrayList g = new ArrayList();
-	   
+	    
+	    model = new DefaultListModel();
+	    for (String ff : f)
+	    	model.addElement(ff);  
+	    lstFiles.setModel(model);
+
+	}
+	public customFileChooser(Frame parent, int xloc, int yloc, boolean bjustfolders, String Title, ImageIcon imgFoldedr)
+	{
+	    super(parent, Title, true);
+
+	    setToMainDrive();
+	    
 	    JPanel panel = new JPanel(new GridBagLayout());
         panel.setBackground(appConstants.MINIPANERADIOBGCOLOR);
 	    GridBagConstraints cs = new GridBagConstraints();
@@ -96,10 +110,16 @@ public class customFileChooser extends JDialog {
 	            String fulldrive = (String)cb.getSelectedItem();
 	    	    String drive = (String) fulldrive.subSequence(0, fulldrive.indexOf(":") + 1);
 	    	    path = drive + "\\";
-	    	    String[] f = Utility_Functions.getFilesandFolders(path);
-	    	    model.clear();
-	    	    for (String ff : f)
-	    	    	model.addElement(ff);
+	    	    try {
+	    	    	changeList();
+	    	    }
+	    	    catch (Exception ex)
+	    	    {
+//	    	    	model.clear();
+	    	        cboDrive.setSelectedIndex(0);
+	    	    	setToMainDrive();
+	    	    	changeList();
+	    	    }
 	        }
 	    });
 
@@ -119,23 +139,23 @@ public class customFileChooser extends JDialog {
 	    listScroller.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 	    lstFiles.setVisibleRowCount(10);
 	    lstFiles.setCellRenderer(new IconListRenderer(imgFoldedr, this));
+	    changeList();
+	    
+	    
 	    lstFiles.addMouseListener(new MouseAdapter() {
 	        public void mouseClicked(MouseEvent evt) {
 	            JList list = (JList)evt.getSource();
 	            if (evt.getClickCount() == 2) {
 	                int index = list.locationToIndex(evt.getPoint());
-	        	    path = path + list.getSelectedValue().toString().trim() + "\\";
-	        	    String[] f = Utility_Functions.getFilesandFolders(path);
-	        	    model = new DefaultListModel();
-	        	    for (String ff : f)
-	        	    	model.addElement(ff);  
-	        	    lstFiles.setModel(model);
-
+	        	    String p = path + list.getSelectedValue().toString().trim() ;
+	        	    
+	        	    if (!Utility_Functions.isFolder(p)) return;
+	        	    path = path + list.getSelectedValue().toString().trim() ;
+	        	    path = path		+ "\\";
+	        	    changeList();
 	            }
 	        }
 	    });
-	    for (String ff : f)
-	    	model.addElement(ff);
 
 	    panel.add(listScroller, cs);
 	    cs.gridwidth = 1;
