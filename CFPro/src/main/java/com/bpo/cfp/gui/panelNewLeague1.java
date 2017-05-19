@@ -12,6 +12,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.ColorModel;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Vector;
@@ -376,7 +377,13 @@ public class panelNewLeague1 extends JPanel  implements ActionListener {
 //Upload league image		
 		if (arg0.getSource() == btnUploadImage) {
 			cfpJFrame cfgf = (cfpJFrame)SwingUtilities.getAncestorOfClass(cfpJFrame.class, panelNewLeague1.this);
-			customFileChooser chooser = new customFileChooser(cfgf, btnUploadImage.getX(), btnUploadImage.getY(), false,"Upload League Image", cApp.getAi().getImgFolder());
+			ArrayList<String> fe = new ArrayList();
+			fe.add(".png");
+			fe.add(".bnp");
+			fe.add("jpeg");
+			fe.add("jpg");
+			fe.add("gif");
+			customFileChooser chooser = new customFileChooser(cfgf, btnUploadImage.getX(), btnUploadImage.getY(), false,"Upload League Image", cApp.getAi().getImgFolder(),fe);
 			chooser.setVisible(true);
 //			JFileChooser dialog = new JFileChooser();
 			

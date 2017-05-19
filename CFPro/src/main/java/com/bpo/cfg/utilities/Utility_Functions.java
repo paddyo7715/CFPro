@@ -21,7 +21,7 @@ public class Utility_Functions {
 	
 	}
 	
-	public static String[] getFilesandFolders(String d) {
+	public static String[] getFilesandFolders(String d, ArrayList<String> fe) {
 
 		File dir = new File(d);
 		File[] files = dir.listFiles();
@@ -47,6 +47,8 @@ public class Utility_Functions {
 			for (int i = 0; i < files.length; i++) {
 				if (!files[i].exists() || !files[i].isAbsolute() || files[i].isHidden() ) continue;
 				if (files[i].isDirectory() && files[i].listFiles() == null) continue;
+				int ei = files[i].toString().lastIndexOf(".");
+				if (files[i].isFile() && (ei == -1  || !fe.contains(files[i].toString().substring(ei)))) continue;
 				a.add(files[i].getName());
 			}
 

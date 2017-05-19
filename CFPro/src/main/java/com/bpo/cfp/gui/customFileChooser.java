@@ -47,6 +47,7 @@ public class customFileChooser extends JDialog {
     private DefaultListModel model = null;
     private JLabel lerrorMessage;
     private ArrayList ad = null;
+    private ArrayList<String> fileexts = null;
 	
 	public String getPath() {
 		return path;
@@ -62,7 +63,7 @@ public class customFileChooser extends JDialog {
 
 	private void changeList()
 	{
-	    String[] f = Utility_Functions.getFilesandFolders(path);
+	    String[] f = Utility_Functions.getFilesandFolders(path, fileexts);
 	    
 	    model = new DefaultListModel();
 	    for (String ff : f)
@@ -70,10 +71,12 @@ public class customFileChooser extends JDialog {
 	    lstFiles.setModel(model);
 
 	}
-	public customFileChooser(Frame parent, int xloc, int yloc, boolean bjustfolders, String Title, ImageIcon imgFoldedr)
+	public customFileChooser(Frame parent, int xloc, int yloc, boolean bjustfolders, String Title, ImageIcon imgFoldedr, ArrayList<String> fileexts)
 	{
 	    super(parent, Title, true);
 
+	    this.fileexts = fileexts;
+	    
 	    setToMainDrive();
 	    
 	    JPanel panel = new JPanel(new GridBagLayout());
