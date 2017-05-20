@@ -48,6 +48,7 @@ public class customFileChooser extends JDialog {
     private JLabel lerrorMessage;
     private ArrayList ad = null;
     private ArrayList<String> fileexts = null;
+    private String sFile = "";
 	
 	public String getPath() {
 		return path;
@@ -77,6 +78,7 @@ public class customFileChooser extends JDialog {
 
 	    this.fileexts = fileexts;
 	    
+	    sFile = "";
 	    setToMainDrive();
 	    
 	    JPanel panel = new JPanel(new GridBagLayout());
@@ -177,6 +179,23 @@ public class customFileChooser extends JDialog {
 	    btnOK = new JButton("OK");
 	    btnOK.setBackground(appConstants.MAINBGCOLOR);
 	    btnOK.setForeground(appConstants.NORMALBTNFOREGROUNDCOLOR);
+	    btnOK.addActionListener(new ActionListener() {
+	   	@Override
+        public void actionPerformed(ActionEvent e) {
+	   		
+	   		   if (lstFiles.getSelectedValue() == null) return;
+	   		   
+	   		   String f = lstFiles.getSelectedValue().toString().trim() ;
+    	       String p = path + f ;
+    	    
+    	       if (f == null || f.equals("..") || Utility_Functions.isFolder(p)) return;	  
+
+ 
+    	       sFile = p;
+    	       
+               dispose();
+        }
+        });
 	    
         btnCancel = new JButton("Cancel");
         btnCancel.setBackground(appConstants.MAINBGCOLOR);
@@ -184,6 +203,8 @@ public class customFileChooser extends JDialog {
         btnCancel.addActionListener(new ActionListener() {
 	   	@Override
         public void actionPerformed(ActionEvent e) {
+	   		   
+	   		   
                dispose();
         }
         });
