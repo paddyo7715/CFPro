@@ -1,12 +1,17 @@
 package com.bpo.cfg.utilities;
 
+import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Vector;
 
+import javax.imageio.IIOException;
+import javax.imageio.ImageIO;
 import javax.swing.filechooser.FileSystemView;
 
 import com.sun.xml.internal.bind.v2.schemagen.xmlschema.List;
@@ -95,6 +100,37 @@ public class Utility_Functions {
 		}
 		
 
+	}
+	
+	public static String validateImageFile(String f, int maximgSize)
+	{
+		String err = null;
+		
+		try {
+			File fle = new File(f);
+			BufferedImage bi = ImageIO.read(fle);
+			if (bi == null)
+				throw new IllegalArgumentException();
+			
+		} 
+		catch (FileNotFoundException e1)
+		{
+			err = "File not found";
+		}
+		catch (IOException e2)
+		{
+			err = "File not a proper image file";
+		}
+		catch (IllegalArgumentException e3)
+		{
+			err = "File is not a recognized image file.";
+		}
+		catch(Exception ex) 
+		{
+			err = "Unknown Error When Attempting to Read File.";
+		}
+		
+		return err;
 	}
 
 	public static void main(String[] args) {

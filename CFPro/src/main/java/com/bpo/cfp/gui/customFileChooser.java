@@ -54,6 +54,10 @@ public class customFileChooser extends JDialog {
 		return path;
 	}
 	
+	public String getsFile() {
+		return sFile;
+	}
+
 	private void setToMainDrive()
 	{
 		ad = Utility_Functions.getalldrives();

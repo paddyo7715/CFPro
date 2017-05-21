@@ -385,16 +385,10 @@ public class panelNewLeague1 extends JPanel  implements ActionListener {
 			fe.add("gif");
 			customFileChooser chooser = new customFileChooser(cfgf, btnUploadImage.getX(), btnUploadImage.getY(), false,"Upload League Image", cApp.getAi().getImgFolder(),fe);
 			chooser.setVisible(true);
-//			JFileChooser dialog = new JFileChooser();
+			String f = chooser.getsFile();
 			
-//			java.awt.Component[] jc =  dialog.getComponents();
-//			for( int i = 0; i < jc.length; i++ )
-//			{
-//				java.awt.Component c = jc[i];
-//			     if( c instanceof Container )
-//			     c.setBackground( Color.blue );
-//			}
-//			dialog.showOpenDialog(this);
+
+
 
 		}
 		
