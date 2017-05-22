@@ -1,6 +1,7 @@
 package com.bpo.cfg.utilities;
 
 import java.awt.image.BufferedImage;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -15,6 +16,7 @@ import javax.imageio.ImageIO;
 import javax.swing.filechooser.FileSystemView;
 
 import com.sun.xml.internal.bind.v2.schemagen.xmlschema.List;
+import com.cfp.exceptions.*;
 
 public class Utility_Functions {
 	
@@ -102,7 +104,7 @@ public class Utility_Functions {
 
 	}
 	
-	public static String validateImageFile(String f, int maximgSize)
+	public static String validateImageFile(String f, long maximgSize)
 	{
 		String err = null;
 		
@@ -111,6 +113,10 @@ public class Utility_Functions {
 			BufferedImage bi = ImageIO.read(fle);
 			if (bi == null)
 				throw new IllegalArgumentException();
+			if (fle.length() > maximgSize)
+				throw new imageFileTooLargeException();
+				
+				
 			
 		} 
 		catch (FileNotFoundException e1)
@@ -124,6 +130,10 @@ public class Utility_Functions {
 		catch (IllegalArgumentException e3)
 		{
 			err = "File is not a recognized image file.";
+		}
+		catch (imageFileTooLargeException e4)
+		{
+			err = "The file is too large.";
 		}
 		catch(Exception ex) 
 		{

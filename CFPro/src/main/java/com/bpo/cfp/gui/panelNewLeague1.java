@@ -28,6 +28,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
@@ -42,6 +43,7 @@ import javax.swing.JComponent;
 import com.bpo.cfg.application.CFGApplication;
 import com.bpo.cfg.constants.appConstants;
 import com.bpo.cfg.enums.callLeagueConfigAction;
+import com.bpo.cfg.utilities.Utility_Functions;
 import com.sun.xml.internal.ws.api.server.Container;
 
 import java.awt.Insets;
@@ -386,6 +388,16 @@ public class panelNewLeague1 extends JPanel  implements ActionListener {
 			customFileChooser chooser = new customFileChooser(cfgf, btnUploadImage.getX(), btnUploadImage.getY(), false,"Upload League Image", cApp.getAi().getImgFolder(),fe);
 			chooser.setVisible(true);
 			String f = chooser.getsFile();
+			
+			if (!f.equals(""))
+			{
+				String err = Utility_Functions.validateImageFile(f, 1048576L);  //1 meg max league image size
+				if (err == null)
+					lLeagueImage.setIcon(new ImageIcon(f));
+				else
+					JOptionPane.showMessageDialog(cfgf,err,"Error Uploading Image",JOptionPane.ERROR_MESSAGE);
+				
+			}
 			
 
 
