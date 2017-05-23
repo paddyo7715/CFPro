@@ -18,6 +18,10 @@ public class appImages {
 	private ImageIcon imgRemoteLeague;
 	private ImageIcon imgExit;
 	private ImageIcon imgFolder;
+	private ImageIcon imgMSGError;
+	private ImageIcon imgMSGWarning;
+	private ImageIcon imgMSGQuestion;
+	private ImageIcon imgMSGInfo;
 	
 	public appImages()
 	{
@@ -33,8 +37,34 @@ public class appImages {
 		imgExit = new ImageIcon(CFGApplication.curDir + "/images/exit.png"); 
 		imgFolder = new ImageIcon(CFGApplication.curDir + "/images/folder-yellow_T.png"); 
 		
+		imgMSGError = new ImageIcon(CFGApplication.curDir + "/images/error.png"); 
+		imgMSGWarning = new ImageIcon(CFGApplication.curDir + "/images/warning.png"); 
+		imgMSGQuestion = new ImageIcon(CFGApplication.curDir + "/images/question.png"); 
+		imgMSGInfo = new ImageIcon(CFGApplication.curDir + "/images/info.png"); 
+
+		
 	}
 	
+
+	public ImageIcon getImgMSGError() {
+		return imgMSGError;
+	}
+
+
+	public ImageIcon getImgMSGWarning() {
+		return imgMSGWarning;
+	}
+
+
+	public ImageIcon getImgMSGQuestion() {
+		return imgMSGQuestion;
+	}
+
+
+	public ImageIcon getImgMSGInfo() {
+		return imgMSGInfo;
+	}
+
 
 	public ImageIcon getImgdefaultImage() {
 		return imgdefaultImage;
