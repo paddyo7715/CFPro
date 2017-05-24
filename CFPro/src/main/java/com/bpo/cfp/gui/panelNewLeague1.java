@@ -6,10 +6,13 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.Frame;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
 import java.awt.image.ColorModel;
 import java.io.File;
 import java.util.ArrayList;
@@ -42,6 +45,7 @@ import javax.swing.JComponent;
 
 import com.bpo.cfg.application.CFGApplication;
 import com.bpo.cfg.constants.appConstants;
+import com.bpo.cfg.enums.MSGBOX_IMAGE;
 import com.bpo.cfg.enums.callLeagueConfigAction;
 import com.bpo.cfg.utilities.Utility_Functions;
 import com.sun.xml.internal.ws.api.server.Container;
@@ -187,7 +191,7 @@ public class panelNewLeague1 extends JPanel  implements ActionListener {
 		paneGen.add(btnUploadImage,b);
 
 		b.gridx++;
-		JLabel lLeagueImage = new JLabel();
+		lLeagueImage = new JLabel();
 		lLeagueImage.setPreferredSize(new Dimension(50, 25));
 		paneGen.add(lLeagueImage,b);
 
@@ -382,20 +386,27 @@ public class panelNewLeague1 extends JPanel  implements ActionListener {
 			ArrayList<String> fe = new ArrayList();
 			fe.add(".png");
 			fe.add(".bnp");
-			fe.add("jpeg");
-			fe.add("jpg");
-			fe.add("gif");
+			fe.add(".jpeg");
+			fe.add(".jpg");
+			fe.add(".gif");
 			customFileChooser chooser = new customFileChooser(cfgf, btnUploadImage.getX(), btnUploadImage.getY(), false,"Upload League Image", cApp.getAi().getImgFolder(),fe);
 			chooser.setVisible(true);
 			String f = chooser.getsFile();
 			
+			f = f.replaceFirst("/", "//");
+			
 			if (!f.equals(""))
 			{
 				String err = Utility_Functions.validateImageFile(f, 1048576L);  //1 meg max league image size
-				if (err == null)
-					lLeagueImage.setIcon(new ImageIcon(f));
-				else
-					JOptionPane.showMessageDialog(cfgf,err,"Error Uploading Image",JOptionPane.ERROR_MESSAGE);
+				if (err == null) {
+					ImageIcon imageIcon = new ImageIcon(new ImageIcon(f).getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT));
+					lLeagueImage.setIcon(imageIcon);
+				}
+				else {
+					customerMSQBox cm = new customerMSQBox(cfgf, err, cApp, MSGBOX_IMAGE.ERROR);
+					cm.setVisible(true);
+					//					JOptionPane.showMessageDialog(cfgf,err,"Error Uploading Image",JOptionPane.ERROR_MESSAGE);
+				}
 				
 			}
 			
