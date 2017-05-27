@@ -90,6 +90,8 @@ public class panelNewLeague1 extends JPanel  implements ActionListener {
 	private String LeaguePassword = null;
 
 	
+	
+	
 	@Autowired
 	private CFGApplication cApp;
 	
