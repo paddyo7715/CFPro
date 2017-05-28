@@ -10,8 +10,8 @@ public class customJComboBox extends JComboBox {
 	private Color custEnabledBGColor = null;
 	private Color custDisabledBGColor = null;
 	
-	public customJComboBox(String[] sYears, Color custEnabledBGColor ,Color custDisabledBGColor) {
-		super(sYears);
+	public customJComboBox(String[] sValues, Color custEnabledBGColor ,Color custDisabledBGColor) {
+		super(sValues);
 		this.custEnabledBGColor = custEnabledBGColor;
 		this.custDisabledBGColor = custDisabledBGColor;
 	}

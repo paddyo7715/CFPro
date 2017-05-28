@@ -28,6 +28,7 @@ import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
@@ -88,6 +89,15 @@ public class panelNewLeague1 extends JPanel  implements ActionListener {
 	private JLabel lLeagueURL = null;
 	private customTextField txtLeagueURL = null;
 	private String LeaguePassword = null;
+	
+//Options Controls
+	private JCheckBox cbPenalties = null;
+	private JCheckBox cbInjuries = null;
+	private JCheckBox cbNewXP = null;
+	private JCheckBox cb2PointConv = null;
+	private JCheckBox cbTrades = null;
+	private JLabel lTradeDeadline = null;
+	private customJComboBox comTradeDeadLine = null;
 
 	
 	
@@ -128,9 +138,6 @@ public class panelNewLeague1 extends JPanel  implements ActionListener {
 		
 		JPanel panCenter = new JPanel();
 		panCenter.setBackground(appConstants.MAINBGCOLOR);
-	
-		JPanel paneGen = new JPanel();
-		paneGen.setLayout(new GridBagLayout());
 		
 		JLabel spacer1 = new JLabel("");
 		spacer1.setForeground(appConstants.MINILABELFG);
@@ -147,6 +154,18 @@ public class panelNewLeague1 extends JPanel  implements ActionListener {
 		JLabel spacer4 = new JLabel("");
 		spacer4.setForeground(appConstants.MINILABELFG);
 		spacer4.setPreferredSize(new Dimension(1,appConstants.ROWHIGHTSPACER));
+
+		
+//Gernal Settings	
+		JPanel paneGen = new JPanel();
+
+		TitledBorder bordGeneral = BorderFactory.createTitledBorder(BorderFactory.createLineBorder(appConstants.MINIBORDERCOLOR), "General Settings");
+		bordGeneral.setTitleColor(appConstants.MINIBORDERCOLOR);
+		bordGeneral.setTitleFont(appConstants.PANETITLEFONT);
+		paneGen.setBorder(bordGeneral);
+
+		paneGen.setBackground(appConstants.MINIPANEBGCOLOR);
+		paneGen.setLayout(new GridBagLayout());
 		
 		GridBagConstraints b = new GridBagConstraints();
 		b.insets = new Insets(0, 5, 0, 0);
@@ -154,13 +173,6 @@ public class panelNewLeague1 extends JPanel  implements ActionListener {
 		b.anchor = GridBagConstraints.WEST;
 		b.gridx  = 0;
 		b.gridy = 0;
-		
-		TitledBorder bordGeneral = BorderFactory.createTitledBorder(BorderFactory.createLineBorder(appConstants.MINIBORDERCOLOR), "General Settings");
-		bordGeneral.setTitleColor(appConstants.MINIBORDERCOLOR);
-		bordGeneral.setTitleFont(appConstants.PANETITLEFONT);
-		paneGen.setBorder(bordGeneral);
-
-		paneGen.setBackground(appConstants.MINIPANEBGCOLOR);
 
 		lName = new JLabel("League Name:");
 		lName.setForeground(appConstants.MINILABELFG);
@@ -319,8 +331,68 @@ public class panelNewLeague1 extends JPanel  implements ActionListener {
 		paneGen.add(spacer4,b);		
 		
 		panCenter.add(paneGen);
+        
+//Options panel
+		JPanel paneOpt = new JPanel();
+				
+		TitledBorder bordOptions = BorderFactory.createTitledBorder(BorderFactory.createLineBorder(appConstants.MINIBORDERCOLOR), "Options");
+		bordOptions.setTitleColor(appConstants.MINIBORDERCOLOR);
+		bordOptions.setTitleFont(appConstants.PANETITLEFONT);
+		paneOpt.setBorder(bordOptions);
 		
-        add(panCenter,  BorderLayout.CENTER);
+		paneOpt.setBackground(appConstants.MINIPANEBGCOLOR);
+		paneOpt.setLayout(new GridBagLayout());
+        
+		GridBagConstraints bOpt = new GridBagConstraints();
+		bOpt.insets = new Insets(0, 0, 0, 29);
+        
+		bOpt.anchor = GridBagConstraints.WEST;
+		bOpt.gridx  = 0;
+		bOpt.gridy = 0;
+		cbPenalties = new JCheckBox("Penalties", true);
+		cbPenalties.setForeground(appConstants.MINILABELFG);
+		cbPenalties.setBackground(appConstants.MINIPANERADIOBGCOLOR);
+		paneOpt.add(cbPenalties,bOpt);
+
+		bOpt.gridx++;
+		cbInjuries  = new JCheckBox("Injuries", true);
+		cbInjuries .setForeground(appConstants.MINILABELFG);
+		cbInjuries.setBackground(appConstants.MINIPANERADIOBGCOLOR);
+		paneOpt.add(cbInjuries ,bOpt);        
+		
+		bOpt.gridx++;
+		cbNewXP  = new JCheckBox("New Extra Point", false);
+		cbNewXP .setForeground(appConstants.MINILABELFG);
+		cbNewXP.setBackground(appConstants.MINIPANERADIOBGCOLOR);
+		paneOpt.add(cbNewXP ,bOpt);  
+        
+		bOpt.gridx++;
+		cb2PointConv  = new JCheckBox("Two Point Conversion", true);
+		cb2PointConv .setForeground(appConstants.MINILABELFG);
+		cb2PointConv.setBackground(appConstants.MINIPANERADIOBGCOLOR);
+		paneOpt.add(cb2PointConv ,bOpt);        
+		
+		bOpt.gridx++;
+		cbTrades  = new JCheckBox("Trades", true);
+		cbTrades .setForeground(appConstants.MINILABELFG);
+		cbTrades.setBackground(appConstants.MINIPANERADIOBGCOLOR);  
+		cbTrades.addActionListener(this);
+		paneOpt.add(cbTrades ,bOpt);
+		
+		JPanel tp = new JPanel(); 
+		tp.setBackground(appConstants.MINIPANEBGCOLOR);
+		lTradeDeadline = new JLabel("Trade Deadline Week:");
+		lTradeDeadline.setForeground(appConstants.MINILABELFG);
+		lTradeDeadline.setBackground(appConstants.MINIPANERADIOBGCOLOR);
+		tp.add(lTradeDeadline);
+		
+		bOpt.gridx++;		
+		String[] sWeeks = {"1","2","3","4","5","6","7","8","9","10","11","12","13","14"};
+		comTradeDeadLine = new customJComboBox(sWeeks, appConstants.MINITXTBACKGROUND, appConstants.DISABLEDINPUT);
+		comTradeDeadLine.setSelectedItem(Integer.toString(thisYear));
+		comTradeDeadLine.setForeground(appConstants.MINITXTFOREGROUND);
+		tp.add(comTradeDeadLine);		
+		paneOpt.add(tp,bOpt);
         
 		painOKCancel.setLayout(new FlowLayout());
 		painOKCancel.add(butCancel);
@@ -328,7 +400,13 @@ public class panelNewLeague1 extends JPanel  implements ActionListener {
 		painOKCancel.setBackground(new Color(appConstants.MBACKGROUNDRED, appConstants.MBACKGROUNDGREEN, appConstants.MBACKGROUNDBLUE));
 		add(painOKCancel, BorderLayout.SOUTH);
 		
+		panCenter.add(paneOpt);
 		
+		
+		
+		
+		
+        add(panCenter,  BorderLayout.CENTER);
 	}
 //This method decides if this is a configuration for a new league or an existing league and sets the availability
 //of the various input fields
@@ -368,10 +446,20 @@ public class panelNewLeague1 extends JPanel  implements ActionListener {
 		
 //General Settings Pane event listeners
 		if (arg0.getSource() == localButton) {
+			if (!localButton.getModel().isSelected())
 			txtLeagueURL.setText("");
 			txtLeagueURL.setEnabled(false);
 		} else if (arg0.getSource() == remoteButton) {
 			txtLeagueURL.setEnabled(true);
+		}
+
+//Enable or Disable Trades		
+		if (arg0.getSource() == cbTrades)  {
+			if (!cbTrades.getModel().isSelected()) {
+			comTradeDeadLine.setSelectedIndex(-1);
+			comTradeDeadLine.setEnabled(false);
+		} else 
+			comTradeDeadLine.setEnabled(true);
 		}
 		
 		if (arg0.getSource() == btnLeaguePassword) {
