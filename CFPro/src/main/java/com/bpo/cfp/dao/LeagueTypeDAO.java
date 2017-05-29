@@ -1,10 +1,10 @@
-package bpo.cfp.services;
+package com.bpo.cfp.dao;
 
 import java.util.List;
 
 import com.bpo.cfp.entity.LeagueType;
 
-public interface LeagueTypeService {
+public interface LeagueTypeDAO {
 
 	List<LeagueType> getLeagueTypes();
 }

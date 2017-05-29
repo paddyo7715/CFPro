@@ -58,13 +58,14 @@ import java.awt.Insets;
 import org.springframework.stereotype.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import bpo.cfp.services.LeagueTypeServiceImpl;
+import com.bpo.cfp.services.LeagueTypeService;
+import com.bpo.cfp.services.LeagueTypeServiceImpl;
 
 @Component
 public class panelNewLeague1 extends JPanel  implements ActionListener {
 	
 	@Autowired
-	LeagueTypeServiceImpl leagueTypeService;
+	LeagueTypeService leagueTypeService;
 	
 	private boolean bnewLeague;  
 	private JLabel ltitle = new JLabel();
@@ -74,6 +75,8 @@ public class panelNewLeague1 extends JPanel  implements ActionListener {
 	private JPanel painOKCancel = new JPanel();
 	
 	private List<LeagueType> lTypes = null;
+	
+	private final int CONFDIVCOLS = 5;
 	
 //General Setting Controls
 	private JLabel lName = null;
@@ -115,10 +118,10 @@ public class panelNewLeague1 extends JPanel  implements ActionListener {
 	private JLabel lDivisions1 = null;
 	private JLabel lConference2 = null;
 	private JLabel lDivisions2 = null;
-	private JTextField txtConference1 = new JTextField(20);
-	private JTextField txtDivone1, txtDivone2, txtDivone3, txtDivone4, txtDivone5, txtDivone6, txtDivone7, txtDivone8, txtDivone9, txtDivone10 = new JTextField(20); 
-	private JTextField txtConference2 = new JTextField(20);
-	private JTextField txtDivtwo1, txtDivtwo2, txtDivtwo3, txtDivtwo4, txtDivtwo5, txtDivtwo6, txtDivtwo7, txtDivtwo8, txtDivtwo9, txtDivtwo10 = new JTextField(20); 
+	private JTextField txtConference1 = new JTextField(CONFDIVCOLS);
+	private JTextField txtDivone1, txtDivone2, txtDivone3, txtDivone4, txtDivone5, txtDivone6, txtDivone7, txtDivone8, txtDivone9, txtDivone10 ; 
+	private JTextField txtConference2 = new JTextField(CONFDIVCOLS);
+	private JTextField txtDivtwo1, txtDivtwo2, txtDivtwo3, txtDivtwo4, txtDivtwo5, txtDivtwo6, txtDivtwo7, txtDivtwo8, txtDivtwo9, txtDivtwo10 ; 
 	private JButton btnRealignTeams = null;
 	
 	
@@ -364,7 +367,7 @@ public class panelNewLeague1 extends JPanel  implements ActionListener {
 		paneOpt.setLayout(new GridBagLayout());
         
 		GridBagConstraints bOpt = new GridBagConstraints();
-		bOpt.insets = new Insets(0, 0, 0, 29);
+		bOpt.insets = new Insets(0, 0, 0, 28);
         
 		bOpt.anchor = GridBagConstraints.WEST;
 		bOpt.gridx  = 0;
@@ -414,11 +417,10 @@ public class panelNewLeague1 extends JPanel  implements ActionListener {
 		tp.add(comTradeDeadLine);		
 		paneOpt.add(tp,bOpt);
         
-		painOKCancel.setLayout(new FlowLayout());
-		painOKCancel.add(butCancel);
-		painOKCancel.add(butSave);
-		painOKCancel.setBackground(new Color(appConstants.MBACKGROUNDRED, appConstants.MBACKGROUNDGREEN, appConstants.MBACKGROUNDBLUE));
-		add(painOKCancel, BorderLayout.SOUTH);
+		bOpt.gridwidth = 7;
+		bOpt.gridy++;
+		paneOpt.add(spacer4,bOpt);	
+		bOpt.gridwidth = 1;
 		
 		panCenter.add(paneOpt);
 
@@ -466,8 +468,19 @@ public class panelNewLeague1 extends JPanel  implements ActionListener {
 		comLeagueFormat = new customJComboBox(formats, appConstants.MINITXTBACKGROUND, appConstants.DISABLEDINPUT);
 //		comLeagueFormat.setSelectedItem(Integer.toString(thisYear));
 		comLeagueFormat.setForeground(appConstants.MINITXTFOREGROUND);
+		
+	    JPanel pstruct4 = new JPanel(new FlowLayout(FlowLayout.CENTER));
+	    pstruct4.setBackground(appConstants.MINIPANEBGCOLOR);
+		btnRealignTeams = new JButton("Realign Teams");
+		btnRealignTeams.setBackground(appConstants.FORMBTNBACKGROUNDCOLOR);
+		btnRealignTeams.setForeground(appConstants.FORMBTNFOREGROUNDCOLOR);
+		btnRealignTeams.setFocusable(false);
+		btnRealignTeams.setPreferredSize(new Dimension(140,20));
+		btnRealignTeams.addActionListener(this);
+		
 	    pstruct1.add(lLeagueFormat);
 	    pstruct1.add(comLeagueFormat);
+	    pstruct1.add(btnRealignTeams);
 	    paneStruct.add(pstruct1,bStruct);
 		
 		bStruct.gridx  = 0;
@@ -475,54 +488,44 @@ public class panelNewLeague1 extends JPanel  implements ActionListener {
 //		bStruct.gridwidth = 130;
 	    JPanel pstruct2 = new JPanel(new FlowLayout(FlowLayout.LEFT));
 	    pstruct2.setBackground(appConstants.MINIPANEBGCOLOR);
-	    lConference1 = new JLabel("Conference 1:");
+	    lConference1 = new JLabel("Conf 1:");
 	    lConference1.setForeground(appConstants.MINILABELFG);		
 	    pstruct2.add(lConference1);
 	    txtConference1.setForeground(appConstants.MINITXTFOREGROUND);
 	    pstruct2.add(txtConference1);
-	    lDivisions1 = new JLabel("Division(s):");
+	    lDivisions1 = new JLabel("Div(s):");
 	    lDivisions1.setForeground(appConstants.MINILABELFG);		
 	    pstruct2.add(lDivisions1);	   
 	    
+	    txtDivone1 = new JTextField(CONFDIVCOLS);
 	    txtDivone1.setForeground(appConstants.MINITXTFOREGROUND);
 	    pstruct2.add(txtDivone1);
-	    pstruct2.add(txtDivone1);	
-	    pstruct2.add(txtDivone1);
+	    txtDivone2 = new JTextField(CONFDIVCOLS);
 	    txtDivone2.setForeground(appConstants.MINITXTFOREGROUND);
 	    pstruct2.add(txtDivone2);
-	    pstruct2.add(txtDivone2);	    
-	    pstruct2.add(txtDivone2);
+	    txtDivone3 = new JTextField(CONFDIVCOLS);
 	    txtDivone3.setForeground(appConstants.MINITXTFOREGROUND);
 	    pstruct2.add(txtDivone3);
-	    pstruct2.add(txtDivone3);
-	    pstruct2.add(txtDivone3);
+	    txtDivone4 = new JTextField(CONFDIVCOLS);
 	    txtDivone4.setForeground(appConstants.MINITXTFOREGROUND);
 	    pstruct2.add(txtDivone4);
-	    pstruct2.add(txtDivone4);
-	    pstruct2.add(txtDivone4);
+	    txtDivone5 = new JTextField(CONFDIVCOLS);
 	    txtDivone5.setForeground(appConstants.MINITXTFOREGROUND);
 	    pstruct2.add(txtDivone5);
-	    pstruct2.add(txtDivone5);
-	    pstruct2.add(txtDivone6);
+	    txtDivone6 = new JTextField(CONFDIVCOLS);
 	    txtDivone6.setForeground(appConstants.MINITXTFOREGROUND);
 	    pstruct2.add(txtDivone6);
-	    pstruct2.add(txtDivone6);
-	    pstruct2.add(txtDivone6);
+	    txtDivone7 = new JTextField(CONFDIVCOLS);
 	    txtDivone7.setForeground(appConstants.MINITXTFOREGROUND);
 	    pstruct2.add(txtDivone7);
-	    pstruct2.add(txtDivone7);
-	    pstruct2.add(txtDivone7);
+	    txtDivone8 = new JTextField(CONFDIVCOLS);
 	    txtDivone8.setForeground(appConstants.MINITXTFOREGROUND);
 	    pstruct2.add(txtDivone8);
-	    pstruct2.add(txtDivone8);
-	    pstruct2.add(txtDivone8);
+	    txtDivone9 = new JTextField(CONFDIVCOLS);
 	    txtDivone9.setForeground(appConstants.MINITXTFOREGROUND);
 	    pstruct2.add(txtDivone9);
-	    pstruct2.add(txtDivone9);
-	    pstruct2.add(txtDivone9);
+	    txtDivone10 = new JTextField(CONFDIVCOLS);
 	    txtDivone10.setForeground(appConstants.MINITXTFOREGROUND);
-	    pstruct2.add(txtDivone10);
-	    pstruct2.add(txtDivone10);
 	    pstruct2.add(txtDivone10);
 	    paneStruct.add(pstruct2,bStruct);    
 	    
@@ -530,68 +533,60 @@ public class panelNewLeague1 extends JPanel  implements ActionListener {
 	    bStruct.gridy = 2;
 	    JPanel pstruct3 = new JPanel(new FlowLayout(FlowLayout.LEFT));
 	    pstruct3.setBackground(appConstants.MINIPANEBGCOLOR);
-	    lConference2 = new JLabel("Conference 2:");
+	    lConference2 = new JLabel("Conf 2:");
 	    lConference2.setForeground(appConstants.MINILABELFG);		
 	    pstruct3.add(lConference2);
 	    txtConference2.setForeground(appConstants.MINITXTFOREGROUND);
 	    pstruct3.add(txtConference2);
-	    lDivisions2 = new JLabel("Division(s):");
+	    lDivisions2 = new JLabel("Div(s):");
 	    lDivisions2.setForeground(appConstants.MINILABELFG);		
 	    pstruct3.add(lDivisions2);	   
+
+	    txtDivtwo1 = new JTextField(CONFDIVCOLS);
+	    txtDivtwo1.setForeground(appConstants.MINITXTFOREGROUND);
+	    pstruct3.add(txtDivtwo1);
+	    txtDivtwo2 = new JTextField(CONFDIVCOLS);
+	    txtDivtwo2.setForeground(appConstants.MINITXTFOREGROUND);
+	    pstruct3.add(txtDivtwo2);
+	    txtDivtwo3 = new JTextField(CONFDIVCOLS);
+	    txtDivtwo3.setForeground(appConstants.MINITXTFOREGROUND);
+	    pstruct3.add(txtDivtwo3);
+	    txtDivtwo4 = new JTextField(CONFDIVCOLS);
+	    txtDivtwo4.setForeground(appConstants.MINITXTFOREGROUND);
+	    pstruct3.add(txtDivtwo4);
+	    txtDivtwo5 = new JTextField(CONFDIVCOLS);
+	    txtDivtwo5.setForeground(appConstants.MINITXTFOREGROUND);
+	    pstruct3.add(txtDivtwo5);
+	    txtDivtwo6 = new JTextField(CONFDIVCOLS);
+	    txtDivtwo6.setForeground(appConstants.MINITXTFOREGROUND);
+	    pstruct3.add(txtDivtwo6);
+	    txtDivtwo7 = new JTextField(CONFDIVCOLS);
+	    txtDivtwo7.setForeground(appConstants.MINITXTFOREGROUND);
+	    pstruct3.add(txtDivtwo7);
+	    txtDivtwo8 = new JTextField(CONFDIVCOLS);
+	    txtDivtwo8.setForeground(appConstants.MINITXTFOREGROUND);
+	    pstruct3.add(txtDivtwo8);
+	    txtDivtwo9 = new JTextField(CONFDIVCOLS);
+	    txtDivtwo9.setForeground(appConstants.MINITXTFOREGROUND);
+	    pstruct3.add(txtDivtwo9);
+	    txtDivtwo10 = new JTextField(CONFDIVCOLS);
+	    txtDivtwo10.setForeground(appConstants.MINITXTFOREGROUND);
+	    pstruct3.add(txtDivtwo10);
+	    paneStruct.add(pstruct3,bStruct);  
 	    
-	    txtDivone2.setForeground(appConstants.MINITXTFOREGROUND);
-	    pstruct3.add(txtDivone2);
-	    pstruct3.add(txtDivone2);	
-	    pstruct3.add(txtDivone2);
-	    txtDivone2.setForeground(appConstants.MINITXTFOREGROUND);
-	    pstruct3.add(txtDivone2);
-	    pstruct3.add(txtDivone2);	    
-	    pstruct3.add(txtDivone2);
-	    txtDivone3.setForeground(appConstants.MINITXTFOREGROUND);
-	    pstruct3.add(txtDivone3);
-	    pstruct3.add(txtDivone3);
-	    pstruct3.add(txtDivone3);
-	    txtDivone4.setForeground(appConstants.MINITXTFOREGROUND);
-	    pstruct3.add(txtDivone4);
-	    pstruct3.add(txtDivone4);
-	    pstruct3.add(txtDivone4);
-	    txtDivone5.setForeground(appConstants.MINITXTFOREGROUND);
-	    pstruct3.add(txtDivone5);
-	    pstruct3.add(txtDivone5);
-	    pstruct3.add(txtDivone6);
-	    txtDivone6.setForeground(appConstants.MINITXTFOREGROUND);
-	    pstruct3.add(txtDivone6);
-	    pstruct3.add(txtDivone6);
-	    pstruct3.add(txtDivone6);
-	    txtDivone7.setForeground(appConstants.MINITXTFOREGROUND);
-	    pstruct3.add(txtDivone7);
-	    pstruct3.add(txtDivone7);
-	    pstruct3.add(txtDivone7);
-	    txtDivone8.setForeground(appConstants.MINITXTFOREGROUND);
-	    pstruct3.add(txtDivone8);
-	    pstruct3.add(txtDivone8);
-	    pstruct3.add(txtDivone8);
-	    txtDivone9.setForeground(appConstants.MINITXTFOREGROUND);
-	    pstruct3.add(txtDivone9);
-	    pstruct3.add(txtDivone9);
-	    pstruct3.add(txtDivone9);
-	    txtDivone10.setForeground(appConstants.MINITXTFOREGROUND);
-	    pstruct3.add(txtDivone10);
-	    pstruct3.add(txtDivone10);
-	    pstruct3.add(txtDivone10);
-	    paneStruct.add(pstruct3,bStruct); 
+	    bStruct.gridx  = 0;
+	    bStruct.gridy = 3;
+	    paneStruct.add(spacer1,bStruct);
 	    
-		bStruct.gridx  = 0;
-		bStruct.gridy = 3;
-		btnRealignTeams = new JButton("Realign Teams");
-		btnRealignTeams.setBackground(appConstants.FORMBTNBACKGROUNDCOLOR);
-		btnRealignTeams.setForeground(appConstants.FORMBTNFOREGROUNDCOLOR);
-		btnRealignTeams.setFocusable(false);
-		btnRealignTeams.setPreferredSize(new Dimension(140,20));
-		btnRealignTeams.addActionListener(this);
-		paneGen.add(btnRealignTeams,bStruct);
-	    
+		panCenter.add(paneStruct);
         add(panCenter,  BorderLayout.CENTER);
+        
+        
+		painOKCancel.setLayout(new FlowLayout());
+		painOKCancel.add(butCancel);
+		painOKCancel.add(butSave);
+		painOKCancel.setBackground(new Color(appConstants.MBACKGROUNDRED, appConstants.MBACKGROUNDGREEN, appConstants.MBACKGROUNDBLUE));
+		add(painOKCancel, BorderLayout.SOUTH);
 	}
 //This method decides if this is a configuration for a new league or an existing league and sets the availability
 //of the various input fields
@@ -690,7 +685,20 @@ public class panelNewLeague1 extends JPanel  implements ActionListener {
 
 		}
 		
-		
+		//League Format Type combo box selection 
+		if (arg0.getSource() == comLeagueFormat) {
+			LeagueType lt =  guiHelper.getLeagueTypefromName((String) comLeagueFormat.getSelectedItem(), lTypes);
+
+			ArrayList<JTextField> ald1 = new ArrayList<JTextField>();
+			ald1.add(txtDivone1); ald1.add(txtDivone2); ald1.add(txtDivone3); ald1.add(txtDivone4); ald1.add(txtDivone5);
+			ald1.add(txtDivone6); ald1.add(txtDivone7); ald1.add(txtDivone8); ald1.add(txtDivone9); ald1.add(txtDivone10);
+
+			ArrayList<JTextField> ald2 = new ArrayList<JTextField>();
+			ald1.add(txtDivtwo1); ald1.add(txtDivtwo2); ald1.add(txtDivtwo3); ald1.add(txtDivtwo4); ald1.add(txtDivtwo5);
+			ald1.add(txtDivtwo6); ald1.add(txtDivtwo7); ald1.add(txtDivtwo8); ald1.add(txtDivtwo9); ald1.add(txtDivtwo10);
+			
+			guiHelper.enableDisableConfDivLabels(lt, lConference1, lConference2, lDivisions1, lDivisions2, txtConference1, txtConference2, ald1, ald2);
+		}
 		
 		
 	}

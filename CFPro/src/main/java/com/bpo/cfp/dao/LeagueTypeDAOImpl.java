@@ -1,10 +1,13 @@
-package bpo.cfp.dao;
+package com.bpo.cfp.dao;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
 import com.bpo.cfp.entity.LeagueType;
 
+@Repository
 public class LeagueTypeDAOImpl implements LeagueTypeDAO {
 
 	@Override

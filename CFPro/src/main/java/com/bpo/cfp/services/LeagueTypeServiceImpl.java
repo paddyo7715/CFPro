@@ -1,4 +1,4 @@
-package bpo.cfp.services;
+package com.bpo.cfp.services;
 
 import java.util.List;
 
@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bpo.cfp.entity.LeagueType;
-import bpo.cfp.dao.LeagueTypeDAO;
+import com.bpo.cfp.dao.LeagueTypeDAO;
 
 
 
