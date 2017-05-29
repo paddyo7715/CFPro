@@ -18,6 +18,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Vector;
 
 import javax.accessibility.AccessibleContext;
@@ -49,6 +50,7 @@ import com.bpo.cfg.constants.appConstants;
 import com.bpo.cfg.enums.MSGBOX_IMAGE;
 import com.bpo.cfg.enums.callLeagueConfigAction;
 import com.bpo.cfg.utilities.Utility_Functions;
+import com.bpo.cfp.entity.LeagueType;
 import com.sun.xml.internal.ws.api.server.Container;
 
 import java.awt.Insets;
@@ -56,8 +58,13 @@ import java.awt.Insets;
 import org.springframework.stereotype.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import bpo.cfp.services.LeagueTypeServiceImpl;
+
 @Component
 public class panelNewLeague1 extends JPanel  implements ActionListener {
+	
+	@Autowired
+	LeagueTypeServiceImpl leagueTypeService;
 	
 	private boolean bnewLeague;  
 	private JLabel ltitle = new JLabel();
@@ -65,6 +72,8 @@ public class panelNewLeague1 extends JPanel  implements ActionListener {
 	private JButton butSave = new JButton("Save");
 	private JButton butCancel = new JButton("Cancel");
 	private JPanel painOKCancel = new JPanel();
+	
+	private List<LeagueType> lTypes = null;
 	
 //General Setting Controls
 	private JLabel lName = null;
@@ -98,8 +107,19 @@ public class panelNewLeague1 extends JPanel  implements ActionListener {
 	private JCheckBox cbTrades = null;
 	private JLabel lTradeDeadline = null;
 	private customJComboBox comTradeDeadLine = null;
-
 	
+//League Structure
+	private JLabel lLeagueFormat = null;
+	private customJComboBox comLeagueFormat = null;
+	private JLabel lConference1 = null;
+	private JLabel lDivisions1 = null;
+	private JLabel lConference2 = null;
+	private JLabel lDivisions2 = null;
+	private JTextField txtConference1 = new JTextField(20);
+	private JTextField txtDivone1, txtDivone2, txtDivone3, txtDivone4, txtDivone5, txtDivone6, txtDivone7, txtDivone8, txtDivone9, txtDivone10 = new JTextField(20); 
+	private JTextField txtConference2 = new JTextField(20);
+	private JTextField txtDivtwo1, txtDivtwo2, txtDivtwo3, txtDivtwo4, txtDivtwo5, txtDivtwo6, txtDivtwo7, txtDivtwo8, txtDivtwo9, txtDivtwo10 = new JTextField(20); 
+	private JButton btnRealignTeams = null;
 	
 	
 	@Autowired
@@ -401,11 +421,176 @@ public class panelNewLeague1 extends JPanel  implements ActionListener {
 		add(painOKCancel, BorderLayout.SOUTH);
 		
 		panCenter.add(paneOpt);
+
+//League Structure		
+		JPanel paneStruct = new JPanel();
 		
+		TitledBorder bordStructure = BorderFactory.createTitledBorder(BorderFactory.createLineBorder(appConstants.MINIBORDERCOLOR), "League Structure");
+		bordStructure.setTitleColor(appConstants.MINIBORDERCOLOR);
+		bordStructure.setTitleFont(appConstants.PANETITLEFONT);
+		paneStruct.setBorder(bordStructure);
 		
+		paneStruct.setBackground(appConstants.MINIPANEBGCOLOR);
+		paneStruct.setLayout(new GridBagLayout());
 		
+		GridBagConstraints bStruct = new GridBagConstraints();
+		bStruct.insets = new Insets(0, 0, 0, 29);
+        
+		bStruct.anchor = GridBagConstraints.WEST;
+		bStruct.gridx  = 0;
+		bStruct.gridy = 0;
+//		bStruct.gridwidth = 130;
+	    JPanel pstruct1 = new JPanel(new FlowLayout(FlowLayout.LEFT));
+	    pstruct1.setBackground(appConstants.MINIPANEBGCOLOR);
+	    lLeagueFormat = new JLabel("League Format:");
+	    lLeagueFormat.setForeground(appConstants.MINILABELFG);
+	    
+//Get all League format types
+	    try {
+	    	lTypes = leagueTypeService.getLeagueTypes();	
+	    	if (lTypes.size() == 0)
+	    		throw new Exception("0 League Format Types Returned from DB!");
+	    } 
+	    catch (Exception e) {
+			cfpJFrame cfgf = (cfpJFrame)SwingUtilities.getAncestorOfClass(cfpJFrame.class, this);
+	    	String err = "Error Getting League Format Types.   Error: " + e.getMessage();
+			customerMSQBox cm = new customerMSQBox(cfgf, err, cApp, MSGBOX_IMAGE.ERROR);
+			cm.setVisible(true);
+	    }
+	    
+	    int i = 0;
+	    String[] formats = new String[lTypes.size()];
+	    for (LeagueType lt : lTypes)
+	    	formats[i++] = lt.getName();
+	    
+		comLeagueFormat = new customJComboBox(formats, appConstants.MINITXTBACKGROUND, appConstants.DISABLEDINPUT);
+//		comLeagueFormat.setSelectedItem(Integer.toString(thisYear));
+		comLeagueFormat.setForeground(appConstants.MINITXTFOREGROUND);
+	    pstruct1.add(lLeagueFormat);
+	    pstruct1.add(comLeagueFormat);
+	    paneStruct.add(pstruct1,bStruct);
 		
-		
+		bStruct.gridx  = 0;
+		bStruct.gridy = 1;
+//		bStruct.gridwidth = 130;
+	    JPanel pstruct2 = new JPanel(new FlowLayout(FlowLayout.LEFT));
+	    pstruct2.setBackground(appConstants.MINIPANEBGCOLOR);
+	    lConference1 = new JLabel("Conference 1:");
+	    lConference1.setForeground(appConstants.MINILABELFG);		
+	    pstruct2.add(lConference1);
+	    txtConference1.setForeground(appConstants.MINITXTFOREGROUND);
+	    pstruct2.add(txtConference1);
+	    lDivisions1 = new JLabel("Division(s):");
+	    lDivisions1.setForeground(appConstants.MINILABELFG);		
+	    pstruct2.add(lDivisions1);	   
+	    
+	    txtDivone1.setForeground(appConstants.MINITXTFOREGROUND);
+	    pstruct2.add(txtDivone1);
+	    pstruct2.add(txtDivone1);	
+	    pstruct2.add(txtDivone1);
+	    txtDivone2.setForeground(appConstants.MINITXTFOREGROUND);
+	    pstruct2.add(txtDivone2);
+	    pstruct2.add(txtDivone2);	    
+	    pstruct2.add(txtDivone2);
+	    txtDivone3.setForeground(appConstants.MINITXTFOREGROUND);
+	    pstruct2.add(txtDivone3);
+	    pstruct2.add(txtDivone3);
+	    pstruct2.add(txtDivone3);
+	    txtDivone4.setForeground(appConstants.MINITXTFOREGROUND);
+	    pstruct2.add(txtDivone4);
+	    pstruct2.add(txtDivone4);
+	    pstruct2.add(txtDivone4);
+	    txtDivone5.setForeground(appConstants.MINITXTFOREGROUND);
+	    pstruct2.add(txtDivone5);
+	    pstruct2.add(txtDivone5);
+	    pstruct2.add(txtDivone6);
+	    txtDivone6.setForeground(appConstants.MINITXTFOREGROUND);
+	    pstruct2.add(txtDivone6);
+	    pstruct2.add(txtDivone6);
+	    pstruct2.add(txtDivone6);
+	    txtDivone7.setForeground(appConstants.MINITXTFOREGROUND);
+	    pstruct2.add(txtDivone7);
+	    pstruct2.add(txtDivone7);
+	    pstruct2.add(txtDivone7);
+	    txtDivone8.setForeground(appConstants.MINITXTFOREGROUND);
+	    pstruct2.add(txtDivone8);
+	    pstruct2.add(txtDivone8);
+	    pstruct2.add(txtDivone8);
+	    txtDivone9.setForeground(appConstants.MINITXTFOREGROUND);
+	    pstruct2.add(txtDivone9);
+	    pstruct2.add(txtDivone9);
+	    pstruct2.add(txtDivone9);
+	    txtDivone10.setForeground(appConstants.MINITXTFOREGROUND);
+	    pstruct2.add(txtDivone10);
+	    pstruct2.add(txtDivone10);
+	    pstruct2.add(txtDivone10);
+	    paneStruct.add(pstruct2,bStruct);    
+	    
+	    bStruct.gridx  = 0;
+	    bStruct.gridy = 2;
+	    JPanel pstruct3 = new JPanel(new FlowLayout(FlowLayout.LEFT));
+	    pstruct3.setBackground(appConstants.MINIPANEBGCOLOR);
+	    lConference2 = new JLabel("Conference 2:");
+	    lConference2.setForeground(appConstants.MINILABELFG);		
+	    pstruct3.add(lConference2);
+	    txtConference2.setForeground(appConstants.MINITXTFOREGROUND);
+	    pstruct3.add(txtConference2);
+	    lDivisions2 = new JLabel("Division(s):");
+	    lDivisions2.setForeground(appConstants.MINILABELFG);		
+	    pstruct3.add(lDivisions2);	   
+	    
+	    txtDivone2.setForeground(appConstants.MINITXTFOREGROUND);
+	    pstruct3.add(txtDivone2);
+	    pstruct3.add(txtDivone2);	
+	    pstruct3.add(txtDivone2);
+	    txtDivone2.setForeground(appConstants.MINITXTFOREGROUND);
+	    pstruct3.add(txtDivone2);
+	    pstruct3.add(txtDivone2);	    
+	    pstruct3.add(txtDivone2);
+	    txtDivone3.setForeground(appConstants.MINITXTFOREGROUND);
+	    pstruct3.add(txtDivone3);
+	    pstruct3.add(txtDivone3);
+	    pstruct3.add(txtDivone3);
+	    txtDivone4.setForeground(appConstants.MINITXTFOREGROUND);
+	    pstruct3.add(txtDivone4);
+	    pstruct3.add(txtDivone4);
+	    pstruct3.add(txtDivone4);
+	    txtDivone5.setForeground(appConstants.MINITXTFOREGROUND);
+	    pstruct3.add(txtDivone5);
+	    pstruct3.add(txtDivone5);
+	    pstruct3.add(txtDivone6);
+	    txtDivone6.setForeground(appConstants.MINITXTFOREGROUND);
+	    pstruct3.add(txtDivone6);
+	    pstruct3.add(txtDivone6);
+	    pstruct3.add(txtDivone6);
+	    txtDivone7.setForeground(appConstants.MINITXTFOREGROUND);
+	    pstruct3.add(txtDivone7);
+	    pstruct3.add(txtDivone7);
+	    pstruct3.add(txtDivone7);
+	    txtDivone8.setForeground(appConstants.MINITXTFOREGROUND);
+	    pstruct3.add(txtDivone8);
+	    pstruct3.add(txtDivone8);
+	    pstruct3.add(txtDivone8);
+	    txtDivone9.setForeground(appConstants.MINITXTFOREGROUND);
+	    pstruct3.add(txtDivone9);
+	    pstruct3.add(txtDivone9);
+	    pstruct3.add(txtDivone9);
+	    txtDivone10.setForeground(appConstants.MINITXTFOREGROUND);
+	    pstruct3.add(txtDivone10);
+	    pstruct3.add(txtDivone10);
+	    pstruct3.add(txtDivone10);
+	    paneStruct.add(pstruct3,bStruct); 
+	    
+		bStruct.gridx  = 0;
+		bStruct.gridy = 3;
+		btnRealignTeams = new JButton("Realign Teams");
+		btnRealignTeams.setBackground(appConstants.FORMBTNBACKGROUNDCOLOR);
+		btnRealignTeams.setForeground(appConstants.FORMBTNFOREGROUNDCOLOR);
+		btnRealignTeams.setFocusable(false);
+		btnRealignTeams.setPreferredSize(new Dimension(140,20));
+		btnRealignTeams.addActionListener(this);
+		paneGen.add(btnRealignTeams,bStruct);
+	    
         add(panCenter,  BorderLayout.CENTER);
 	}
 //This method decides if this is a configuration for a new league or an existing league and sets the availability

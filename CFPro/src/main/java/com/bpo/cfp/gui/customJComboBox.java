@@ -23,5 +23,6 @@ public class customJComboBox extends JComboBox {
 		else
 			this.setBackground(custDisabledBGColor);
 	}
+	
 
 }
