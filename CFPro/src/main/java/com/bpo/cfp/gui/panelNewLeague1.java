@@ -177,10 +177,17 @@ public class panelNewLeague1 extends JPanel  implements ActionListener {
 		JLabel spacer4 = new JLabel("");
 		spacer4.setForeground(appConstants.MINILABELFG);
 		spacer4.setPreferredSize(new Dimension(1,appConstants.ROWHIGHTSPACER));
+		
+//		JLabel panelspacer1 = new JLabel("");
+//		spacer4.setForeground(appConstants.MINILABELFG);
+//		spacer4.setPreferredSize(new Dimension(appConstants.PANELWIDTHSPACER,1));		
 
 		
 //Gernal Settings	
 		JPanel paneGen = new JPanel();
+		paneGen.setPreferredSize(new Dimension(830,150));	
+		paneGen.setMinimumSize(new Dimension(830,150));	
+		paneGen.setMaximumSize(new Dimension(830,150));	
 
 		TitledBorder bordGeneral = BorderFactory.createTitledBorder(BorderFactory.createLineBorder(appConstants.MINIBORDERCOLOR), "General Settings");
 		bordGeneral.setTitleColor(appConstants.MINIBORDERCOLOR);
@@ -203,7 +210,9 @@ public class panelNewLeague1 extends JPanel  implements ActionListener {
 
 		b.gridx++;
 		txtName = new customTextField(6, appConstants.MINITXTBACKGROUND, appConstants.DISABLEDINPUT);
-		txtName.setColumns(6);
+		txtName.setPreferredSize(new Dimension(100,20));
+		txtName.setMinimumSize(new Dimension(100,20));
+		txtName.setMaximumSize(new Dimension(100,20));
 		txtName.setForeground(appConstants.MINITXTFOREGROUND);
 		paneGen.add(txtName,b);
 		b.gridx++;
@@ -214,7 +223,10 @@ public class panelNewLeague1 extends JPanel  implements ActionListener {
 
 		b.gridx++;
 		txtLongName = new customTextField(50, appConstants.MINITXTBACKGROUND, appConstants.DISABLEDINPUT);
-		txtLongName.setColumns(18);
+		txtLongName.setPreferredSize(new Dimension(200,20));
+		txtLongName.setMinimumSize(new Dimension(200,20));
+		txtLongName.setMaximumSize(new Dimension(200,20));
+//		txtLongName.setColumns(18);
 		txtLongName.setForeground(appConstants.MINITXTFOREGROUND);
 		paneGen.add(txtLongName,b);
 
@@ -243,7 +255,10 @@ public class panelNewLeague1 extends JPanel  implements ActionListener {
 
 		b.gridx++;
 		txtCommissionerName = new customTextField(50, appConstants.MINITXTBACKGROUND, appConstants.DISABLEDINPUT);
-		txtCommissionerName.setColumns(18);
+		txtCommissionerName.setPreferredSize(new Dimension(200,20));
+		txtCommissionerName.setMinimumSize(new Dimension(200,20));
+		txtCommissionerName.setMaximumSize(new Dimension(200,20));
+//		txtCommissionerName.setColumns(18);
 		txtCommissionerName.setForeground(appConstants.MINITXTFOREGROUND);
 		paneGen.add(txtCommissionerName,b);
 
@@ -254,7 +269,10 @@ public class panelNewLeague1 extends JPanel  implements ActionListener {
 
 		b.gridx++;
 		txtLeagueEmail = new customTextField(50, appConstants.MINITXTBACKGROUND, appConstants.DISABLEDINPUT);
-		txtLeagueEmail.setColumns(18);
+		txtLeagueEmail.setPreferredSize(new Dimension(200,20));
+		txtLeagueEmail.setMinimumSize(new Dimension(200,20));
+		txtLeagueEmail.setMaximumSize(new Dimension(200,20));		
+//		txtLeagueEmail.setColumns(18);
 		txtLeagueEmail.setForeground(appConstants.MINITXTFOREGROUND);
 		paneGen.add(txtLeagueEmail,b);
 		
@@ -278,7 +296,10 @@ public class panelNewLeague1 extends JPanel  implements ActionListener {
 
 		b.gridx++;
 		txtChampionshipGame = new customTextField(50, appConstants.MINITXTBACKGROUND, appConstants.DISABLEDINPUT);
-		txtChampionshipGame.setColumns(18);
+		txtChampionshipGame.setPreferredSize(new Dimension(200,20));
+		txtChampionshipGame.setMinimumSize(new Dimension(200,20));
+		txtChampionshipGame.setMaximumSize(new Dimension(200,20));	
+//		txtChampionshipGame.setColumns(18);
 		txtChampionshipGame.setBackground(appConstants.MINITXTBACKGROUND);
 		txtChampionshipGame.setForeground(appConstants.MINITXTFOREGROUND);
 		paneGen.add(txtChampionshipGame,b);
@@ -345,7 +366,10 @@ public class panelNewLeague1 extends JPanel  implements ActionListener {
 		b.gridx++;
 		b.gridwidth = 2;
 		txtLeagueURL = new customTextField(100, appConstants.MINITXTBACKGROUND, appConstants.DISABLEDINPUT);
-		txtLeagueURL.setColumns(31);
+		txtLeagueURL.setPreferredSize(new Dimension(300,20));
+		txtLeagueURL.setMinimumSize(new Dimension(300,20));
+		txtLeagueURL.setMaximumSize(new Dimension(300,20));	
+//		txtLeagueURL.setColumns(31);
 		txtLeagueURL.setForeground(appConstants.MINITXTFOREGROUND);
 		paneGen.add(txtLeagueURL,b);
 
@@ -357,7 +381,11 @@ public class panelNewLeague1 extends JPanel  implements ActionListener {
         
 //Options panel
 		JPanel paneOpt = new JPanel();
-				
+		paneOpt.setPreferredSize(new Dimension(830,80));		
+		paneOpt.setMinimumSize(new Dimension(830,80));		
+		paneOpt.setMaximumSize(new Dimension(830,80));		
+		
+		
 		TitledBorder bordOptions = BorderFactory.createTitledBorder(BorderFactory.createLineBorder(appConstants.MINIBORDERCOLOR), "Options");
 		bordOptions.setTitleColor(appConstants.MINIBORDERCOLOR);
 		bordOptions.setTitleFont(appConstants.PANETITLEFONT);
@@ -426,7 +454,10 @@ public class panelNewLeague1 extends JPanel  implements ActionListener {
 
 //League Structure		
 		JPanel paneStruct = new JPanel();
-		
+		paneStruct.setPreferredSize(new Dimension(830,150));	
+		paneStruct.setMinimumSize(new Dimension(830,150));	
+		paneStruct.setMaximumSize(new Dimension(830,150));	
+
 		TitledBorder bordStructure = BorderFactory.createTitledBorder(BorderFactory.createLineBorder(appConstants.MINIBORDERCOLOR), "League Structure");
 		bordStructure.setTitleColor(appConstants.MINIBORDERCOLOR);
 		bordStructure.setTitleFont(appConstants.PANETITLEFONT);
@@ -468,6 +499,7 @@ public class panelNewLeague1 extends JPanel  implements ActionListener {
 		comLeagueFormat = new customJComboBox(formats, appConstants.MINITXTBACKGROUND, appConstants.DISABLEDINPUT);
 //		comLeagueFormat.setSelectedItem(Integer.toString(thisYear));
 		comLeagueFormat.setForeground(appConstants.MINITXTFOREGROUND);
+		comLeagueFormat.addActionListener(this);
 		
 	    JPanel pstruct4 = new JPanel(new FlowLayout(FlowLayout.CENTER));
 	    pstruct4.setBackground(appConstants.MINIPANEBGCOLOR);
@@ -574,9 +606,7 @@ public class panelNewLeague1 extends JPanel  implements ActionListener {
 	    pstruct3.add(txtDivtwo10);
 	    paneStruct.add(pstruct3,bStruct);  
 	    
-	    bStruct.gridx  = 0;
-	    bStruct.gridy = 3;
-	    paneStruct.add(spacer1,bStruct);
+
 	    
 		panCenter.add(paneStruct);
         add(panCenter,  BorderLayout.CENTER);
@@ -694,8 +724,8 @@ public class panelNewLeague1 extends JPanel  implements ActionListener {
 			ald1.add(txtDivone6); ald1.add(txtDivone7); ald1.add(txtDivone8); ald1.add(txtDivone9); ald1.add(txtDivone10);
 
 			ArrayList<JTextField> ald2 = new ArrayList<JTextField>();
-			ald1.add(txtDivtwo1); ald1.add(txtDivtwo2); ald1.add(txtDivtwo3); ald1.add(txtDivtwo4); ald1.add(txtDivtwo5);
-			ald1.add(txtDivtwo6); ald1.add(txtDivtwo7); ald1.add(txtDivtwo8); ald1.add(txtDivtwo9); ald1.add(txtDivtwo10);
+			ald2.add(txtDivtwo1); ald2.add(txtDivtwo2); ald2.add(txtDivtwo3); ald2.add(txtDivtwo4); ald2.add(txtDivtwo5);
+			ald2.add(txtDivtwo6); ald2.add(txtDivtwo7); ald2.add(txtDivtwo8); ald2.add(txtDivtwo9); ald2.add(txtDivtwo10);
 			
 			guiHelper.enableDisableConfDivLabels(lt, lConference1, lConference2, lDivisions1, lDivisions2, txtConference1, txtConference2, ald1, ald2);
 		}

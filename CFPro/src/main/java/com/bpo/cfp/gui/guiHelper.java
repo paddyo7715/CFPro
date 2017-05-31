@@ -54,17 +54,21 @@ public class guiHelper {
 			break;			
 		}
 		
-		setDivtxts(lt.getDivisions(), divs1);
-		setDivtxts(lt.getDivisions(), divs2);
+		setDivtxts(1,lt.getConferences(),lt.getDivisions(), divs1);
+		setDivtxts(2,lt.getConferences(),lt.getDivisions(), divs2);
 		
 	}
-	public static void setDivtxts(int divs, List<JTextField> divslist) 
+	public static void setDivtxts(int confnum, int confs, int divs, List<JTextField> divslist) 
 	{
+		
+		boolean bAllowDivs = true;
+		
+		if (confnum == 2 && confs < 2) bAllowDivs = false;
 		
 		int i = 1;
 		for (JTextField txt : divslist) {
 			txt.setText("");
-			if (i <= divs)
+			if (i <= divs && bAllowDivs)
 				txt.setVisible(true);
 			else
 				txt.setVisible(false);
