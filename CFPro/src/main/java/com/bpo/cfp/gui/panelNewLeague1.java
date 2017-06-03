@@ -105,7 +105,7 @@ public class panelNewLeague1 extends JPanel  implements ActionListener {
 //Options Controls
 	private JCheckBox cbPenalties = null;
 	private JCheckBox cbInjuries = null;
-	private JCheckBox cbNewXP = null;
+	private JCheckBox cbHomeFieldAdv = null;
 	private JCheckBox cb2PointConv = null;
 	private JCheckBox cbTrades = null;
 	private JLabel lTradeDeadline = null;
@@ -412,13 +412,13 @@ public class panelNewLeague1 extends JPanel  implements ActionListener {
 		paneOpt.add(cbInjuries ,bOpt);        
 		
 		bOpt.gridx++;
-		cbNewXP  = new JCheckBox("New Extra Point", false);
-		cbNewXP .setForeground(appConstants.MINILABELFG);
-		cbNewXP.setBackground(appConstants.MINIPANERADIOBGCOLOR);
-		paneOpt.add(cbNewXP ,bOpt);  
+		cbHomeFieldAdv  = new JCheckBox("Home Field Advantage", true);
+		cbHomeFieldAdv .setForeground(appConstants.MINILABELFG);
+		cbHomeFieldAdv.setBackground(appConstants.MINIPANERADIOBGCOLOR);
+		paneOpt.add(cbHomeFieldAdv ,bOpt);  
         
 		bOpt.gridx++;
-		cb2PointConv  = new JCheckBox("Two Point Conversion", true);
+		cb2PointConv  = new JCheckBox("2 Point Conv", true);
 		cb2PointConv .setForeground(appConstants.MINILABELFG);
 		cb2PointConv.setBackground(appConstants.MINIPANERADIOBGCOLOR);
 		paneOpt.add(cb2PointConv ,bOpt);        
@@ -474,6 +474,10 @@ public class panelNewLeague1 extends JPanel  implements ActionListener {
 		bStruct.gridy = 0;
 //		bStruct.gridwidth = 130;
 	    JPanel pstruct1 = new JPanel(new FlowLayout(FlowLayout.LEFT));
+	    pstruct1.setPreferredSize(new Dimension(795,35));	
+	    pstruct1.setMinimumSize(new Dimension(795,35));	
+	    pstruct1.setMaximumSize(new Dimension(795,35));	
+
 	    pstruct1.setBackground(appConstants.MINIPANEBGCOLOR);
 	    lLeagueFormat = new JLabel("League Format:");
 	    lLeagueFormat.setForeground(appConstants.MINILABELFG);
@@ -497,7 +501,6 @@ public class panelNewLeague1 extends JPanel  implements ActionListener {
 	    	formats[i++] = lt.getName();
 	    
 		comLeagueFormat = new customJComboBox(formats, appConstants.MINITXTBACKGROUND, appConstants.DISABLEDINPUT);
-//		comLeagueFormat.setSelectedItem(Integer.toString(thisYear));
 		comLeagueFormat.setForeground(appConstants.MINITXTFOREGROUND);
 		comLeagueFormat.addActionListener(this);
 		
@@ -519,6 +522,11 @@ public class panelNewLeague1 extends JPanel  implements ActionListener {
 		bStruct.gridy = 1;
 //		bStruct.gridwidth = 130;
 	    JPanel pstruct2 = new JPanel(new FlowLayout(FlowLayout.LEFT));
+	    pstruct2.setPreferredSize(new Dimension(795,35));	
+	    pstruct2.setMinimumSize(new Dimension(795,35));	
+	    pstruct2.setMaximumSize(new Dimension(795,35));	
+	    
+	    
 	    pstruct2.setBackground(appConstants.MINIPANEBGCOLOR);
 	    lConference1 = new JLabel("Conf 1:");
 	    lConference1.setForeground(appConstants.MINILABELFG);		
@@ -564,6 +572,9 @@ public class panelNewLeague1 extends JPanel  implements ActionListener {
 	    bStruct.gridx  = 0;
 	    bStruct.gridy = 2;
 	    JPanel pstruct3 = new JPanel(new FlowLayout(FlowLayout.LEFT));
+	    pstruct3.setPreferredSize(new Dimension(795,35));	
+	    pstruct3.setMinimumSize(new Dimension(795,35));	
+	    pstruct3.setMaximumSize(new Dimension(795,35));	
 	    pstruct3.setBackground(appConstants.MINIPANEBGCOLOR);
 	    lConference2 = new JLabel("Conf 2:");
 	    lConference2.setForeground(appConstants.MINILABELFG);		
